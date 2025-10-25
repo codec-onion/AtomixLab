@@ -5,10 +5,10 @@ import App from './App.vue'
 import router from './router'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faFlaskVial } from '@fortawesome/free-solid-svg-icons'
+import { faFlaskVial, faExplosion } from '@fortawesome/free-solid-svg-icons'
 import "./assets/styles/variables.css"
 
-library.add(faFlaskVial)
+library.add(faFlaskVial, faExplosion)
 
 const app = createApp(App)
 

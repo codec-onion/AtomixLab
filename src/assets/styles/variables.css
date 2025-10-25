@@ -1,6 +1,32 @@
 :root {
+  /* Les couleurs */
   --color-primary: #ECF8FF;
   --color-secondary: #34549F;
-  --color-secondary: white;
+  --color-tertiary: white;
   --color-icons: #26AAE2;
+
+  /* Paramétrages des font global */
+  --font-family-title1_2: "Rokkitt", sans-serif;
+  --font-family-title3_text: "EB Garamond", sans-serif;
+
+  /* Paramétrages des font sur desktop */
+  --font-size-title1-desktop: 68px; 
+  --font-size-title2-desktop: 55px; 
+  --font-size-title3-desktop: 45px; 
+  --font-size-title4-desktop: 36px;
+  --font-size-text-primary-desktop: 24px;
+  --font-size-text-secondary-desktop: 16px;
+
+  --font-weight-title1_3-desktop: bold;
+
+  /* Paramétrages des font sur mobile */
+  --font-size-title1-mobile: 40px; 
+  --font-size-title2-mobile: 34px; 
+  --font-size-title3-mobile: 24px; 
+  --font-size-title4-mobile: 24px;
+  --font-size-text-primary-mobile: 20px;
+  --font-size-text-secondary-mobile: 18px;
+
+  --font-weight-title1-mobile: bold;
+  --font-weight-title3-mobile: bold;
 }
