@@ -3,14 +3,19 @@ import { createPinia } from 'pinia'
 
 import App from './App.vue'
 import router from './router'
+
+/* FontAwesome Icons */
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faFlaskVial, faExplosion } from '@fortawesome/free-solid-svg-icons'
+library.add(faFlaskVial, faExplosion)
+
+/* Styles CSS global */
 import "./assets/styles/reset.css"
 import "./assets/styles/base.css"
 import "./assets/styles/variables.css"
+import "./assets/styles/class.css"
 
-library.add(faFlaskVial, faExplosion)
 
 const app = createApp(App)
 
