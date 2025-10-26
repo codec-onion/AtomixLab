@@ -17,6 +17,7 @@ header {
   padding: 10px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   background-color: var(--color-primary);
 }
 #header_title {
@@ -26,7 +27,9 @@ header {
   color: var(--color-secondary);
 }
 #header_icons {
+  font-family: var(--font-family-title1_2);
   font-size: var(--font-size-title1-desktop);
+  font-weight: var(--font-weight-title1_3-desktop);
   color: var(--color-icons);
 }
 </style>

@@ -6,6 +6,8 @@ import router from './router'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faFlaskVial, faExplosion } from '@fortawesome/free-solid-svg-icons'
+import "./assets/styles/reset.css"
+import "./assets/styles/base.css"
 import "./assets/styles/variables.css"
 
 library.add(faFlaskVial, faExplosion)
