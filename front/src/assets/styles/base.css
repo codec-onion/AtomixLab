@@ -21,6 +21,6 @@ h4 {
   font-size: 36px;
 }
 
-h1 {
-  font-size: var();
+h3, h4, p {
+  font-family: var(--font-family-title3_4_text);
 }

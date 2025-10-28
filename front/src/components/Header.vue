@@ -14,8 +14,7 @@
 header {
   width: 100%;
   padding: 10px;
-  /* justify-content: space-between;
-  align-items: center; */
+  margin-bottom: 20px;
   background-color: var(--color-primary);
 }
 #header_title, #header_icons {

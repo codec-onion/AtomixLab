@@ -1,5 +1,5 @@
 <template>
-  <footer>
+  <footer class="secondary_text">
     <p>© Copyright {{ currentYear }}</p>
     <p>Toute reproduction partielle ou totale est interdite.</p>
   </footer>
@@ -16,7 +16,7 @@ footer {
   background-color: var(--color-secondary);
   color: var(--color-tertiary);
   text-align: center;
-  padding: 10px;
+  padding: 20px;
   font-family: var(--font-family-title3_text);
   font-size: var(--font-size-text-secondary-desktop);
 }
