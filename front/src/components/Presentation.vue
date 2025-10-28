@@ -13,6 +13,7 @@
 <style scoped>
 section {
   padding: 20px;
+  margin-bottom: 50px;
 }
 h1,p {
   text-align: center;
@@ -24,6 +25,5 @@ h1 {
 p {
   font-size: 35px;
   font-family: var(--font-family-title1_2);
-  margin-bottom: 30px;
 }
 </style>
