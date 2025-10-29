@@ -1,9 +1,9 @@
 <template>
-  <section>
-    <header class="flexbox_usual">
+  <section class="margin_section">
+    <header>
       <div class="line"></div>
       <select name="sessionChoisie">
-        <option value="">--Please choose an option--</option>
+        <option value="">Session</option>
         <option value="dog">Dog</option>
         <option value="cat">Cat</option>
         <option value="hamster">Hamster</option>
@@ -12,7 +12,7 @@
         <option value="goldfish">Goldfish</option>
       </select>
       <select name="sessionChoisie">
-        <option value="">--Please choose an option--</option>
+        <option value="">Niveau Scolaire</option>
         <option value="dog">Dog</option>
         <option value="cat">Cat</option>
         <option value="hamster">Hamster</option>
@@ -21,7 +21,7 @@
         <option value="goldfish">Goldfish</option>
       </select>
       <select name="sessionChoisie">
-        <option value="">--Please choose an option--</option>
+        <option value="">Thème</option>
         <option value="dog">Dog</option>
         <option value="cat">Cat</option>
         <option value="hamster">Hamster</option>
@@ -29,15 +29,18 @@
         <option value="spider">Spider</option>
         <option value="goldfish">Goldfish</option>
       </select>
-      <select name="sessionChoisie">
-        <option value="">--Please choose an option--</option>
-        <option value="dog">Dog</option>
-        <option value="cat">Cat</option>
-        <option value="hamster">Hamster</option>
-        <option value="parrot">Parrot</option>
-        <option value="spider">Spider</option>
-        <option value="goldfish">Goldfish</option>
-      </select>
+      <div>
+        <select name="sessionChoisie">
+          <option value="">Chapitre</option>
+          <option value="dog">Dog</option>
+          <option value="cat">Cat</option>
+          <option value="hamster">Hamster</option>
+          <option value="parrot">Parrot</option>
+          <option value="spider">Spider</option>
+          <option value="goldfish">Goldfish</option>
+        </select>
+        <font-awesome-icon class="font_awesome" icon="fa-solid fa-circle-chevron-down" />
+      </div>
     </header>
   </section>
 </template>
@@ -46,8 +49,6 @@
 
 <style scoped>
 section {
-  width: 90%;
-  margin: auto;
   margin-bottom: 50px;
   position: relative;
   padding: 20px;
@@ -60,5 +61,31 @@ section {
   width: 100%;
   height: 2px;
   background-color: var(--color-icons);
+}
+select:not(select:last-of-type) {
+  margin-right: 20px;
+}
+select {
+  margin-bottom: 20px;
+  width: 250px;
+  height: 40px;
+  border-radius: 20px;
+  text-align: center;
+  font-family: var(--font-family-title3_4_text);
+  font-size: var(--font-size-text-primary-desktop);
+  color: var(--color-secondary);
+  appearance: none;
+  border: none;
+}
+div {
+  position: relative;
+  display: inline-block;
+}
+.font_awesome {
+  color: var(--color-icons);
+  font-size: 40px;
+  position: absolute;
+  right: -5px;
+  pointer-events: none;
 }
 </style>

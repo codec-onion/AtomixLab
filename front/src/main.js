@@ -7,8 +7,13 @@ import router from './router'
 /* FontAwesome Icons */
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faFlaskVial, faExplosion } from '@fortawesome/free-solid-svg-icons'
-library.add(faFlaskVial, faExplosion)
+import { 
+  faFlaskVial,
+  faExplosion,
+  faCircleChevronDown,
+  faCircleChevronUp
+} from '@fortawesome/free-solid-svg-icons'
+library.add(faFlaskVial, faExplosion, faCircleChevronDown, faCircleChevronUp)
 
 /* Styles CSS global */
 import "./assets/styles/reset.css"

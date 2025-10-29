@@ -19,3 +19,7 @@
 .secondary_text {
   font-size: var(--font-size-text-secondary-desktop);
 }
+
+.margin_section {
+  margin: 0 50px 0 50px;
+}
