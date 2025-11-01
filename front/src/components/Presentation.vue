@@ -2,7 +2,7 @@
   <section class="margin_section">
     <h1>Cours de Physique et Chimie</h1>
     <p>
-      Bienvenue sur ce site qui regroupe des cours de Physique et Phimie faits par un professeur de l'Éducation nationale.
+      Bienvenue sur ce site qui regroupe des cours de Physique et Chimie faits par un professeur de l'Éducation nationale.
     </p>
   </section>
 </template>
