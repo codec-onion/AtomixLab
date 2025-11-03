@@ -1,18 +1,67 @@
 [
   {
-    "_id": "56c8adc0-6554-4c04-aa0e-2f2cbefb0802",
-    "name": "2022-2023"
+    "_id": ObjectId("6544c6d81a2f4e1a9e4b1001"),
+    "name": "2020-2021",
+    "niveauxScolaire": [
+      { "id": "7b2d4b6e-1c3b-4a2d-83e2-63f1a8f61c10", "name": "Seconde Générale" },
+      { "id": "42b9f88f-3c59-4f14-b49a-bac43d879321", "name": "Première Générale" },
+      { "id": "c6a73b84-d87d-4c3a-90e1-5f23b8576b4b", "name": "Terminale Générale" },
+      { "id": "5e42c9ab-fb6b-4f28-b7b7-126f31bcbfc7", "name": "Première STI2D" },
+      { "id": "91d3e427-4464-4f6a-b15a-4a4c4286a27e", "name": "Terminale STI2D" },
+      { "id": "cb5d7d6b-1ec2-4b1c-b68a-5a24ec14516b", "name": "Première STMG" },
+      { "id": "9e7f8d23-8bb0-46d7-9f26-9d11d5b78c91", "name": "Terminale STMG" }
+    ]
   },
   {
-    "_id": "c93a9bba-6c28-4653-936f-87c3c4874ddd",
-    "name": "2023-2024"
+    "_id": ObjectId("6544c6d81a2f4e1a9e4b1002"),
+    "name": "2021-2022",
+    "niveauxScolaire": [
+      { "id": "cb713fc1-4081-4706-9211-06dc261ba78a", "name": "Seconde Générale" },
+      { "id": "c4c9d1a7-ffdf-4d15-bdb1-83a29757c0b5", "name": "Première Générale" },
+      { "id": "f6a9c8e2-68b5-437b-bb67-d86e09b1c4cc", "name": "Terminale Générale" },
+      { "id": "aec8e579-d59f-4807-9a93-7c123ec90b94", "name": "Première STI2D" },
+      { "id": "ccdfcd05-76a9-49d7-8d8e-0c9b1392bba5", "name": "Terminale STI2D" },
+      { "id": "b01b2ef9-bb27-43e4-8706-f6f3f4a5c1f7", "name": "Première STMG" },
+      { "id": "f0c9271e-04b2-4c83-94df-1df51f77277f", "name": "Terminale STMG" }
+    ]
   },
   {
-    "_id": "7980449b-8ed2-4ddc-b4fe-5c2782cf6ccf",
-    "name": "2024-2025"
+    "_id": ObjectId("6544c6d81a2f4e1a9e4b1003"),
+    "name": "2022-2023",
+    "niveauxScolaire": [
+      { "id": "b4d3a55c-bbfa-4e1a-b4b9-43fdc6e4fda4", "name": "Seconde Générale" },
+      { "id": "7b04a87f-d10c-4957-8098-8cf740b3f06e", "name": "Première Générale" },
+      { "id": "a3f04c29-3e5f-472d-bb37-7b620f394f7c", "name": "Terminale Générale" },
+      { "id": "ec22c4da-2cc0-45e2-b0c0-97bfe31b39e4", "name": "Première STI2D" },
+      { "id": "6d9a37b0-2ef0-45b8-81e3-f3a4e0c5e65e", "name": "Terminale STI2D" },
+      { "id": "2e50b61e-5909-49b9-8a60-73e33177f00c", "name": "Première STMG" },
+      { "id": "99a47a2a-26f4-4a17-b47b-0e5adf3dc343", "name": "Terminale STMG" }
+    ]
   },
   {
-    "_id": "53141e20-c463-4a57-b414-e6ab48f6b203",
-    "name": "2025-2026"
+    "_id": ObjectId("6544c6d81a2f4e1a9e4b1004"),
+    "name": "2023-2024",
+    "niveauxScolaire": [
+      { "id": "c5f0d5a1-dcfb-42c0-b8f5-334aaea3b7f8", "name": "Seconde Générale" },
+      { "id": "1b7e5a1c-c3a2-4d61-a80e-91dc221b7549", "name": "Première Générale" },
+      { "id": "5324e3b0-14e4-480d-b72e-65e586ff64ac", "name": "Terminale Générale" },
+      { "id": "75f17cb0-8894-4d0a-9436-7b0296b4d36c", "name": "Première STI2D" },
+      { "id": "1e9637c5-7b48-4acb-a703-9dd11cc7a169", "name": "Terminale STI2D" },
+      { "id": "f8b9b8db-6b13-4f1b-91d2-b9e6213b524e", "name": "Première STMG" },
+      { "id": "9e58a4c1-39ef-4b12-b10e-60cfecdc2a3e", "name": "Terminale STMG" }
+    ]
+  },
+  {
+    "_id": ObjectId("6544c6d81a2f4e1a9e4b1005"),
+    "name": "2024-2025",
+    "niveauxScolaire": [
+      { "id": "b037c5b9-f21a-4ff4-b7f8-26e21b13f67f", "name": "Seconde Générale" },
+      { "id": "2a90e67a-9e17-4a8b-bb3b-3c741e70383e", "name": "Première Générale" },
+      { "id": "27e381a7-65cb-46e8-86a0-94a63a4d33ab", "name": "Terminale Générale" },
+      { "id": "e59733e3-90d3-42f4-92b1-b9a74b9277f5", "name": "Première STI2D" },
+      { "id": "7c0fba19-5df6-48e3-91ab-6a11d779b20d", "name": "Terminale STI2D" },
+      { "id": "95e49f8b-7eac-4efb-98a7-c9e11a6f7d0d", "name": "Première STMG" },
+      { "id": "d2539ebf-ef2b-4cfb-9c82-1a3b6498e154", "name": "Terminale STMG" }
+    ]
   }
 ]

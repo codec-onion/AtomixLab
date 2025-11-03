@@ -1,42 +1,10 @@
 <template>
   <header>
     <div class="line"></div>
-    <Select name="session">
-        <option value="">Session</option>
-        <option value="dog">Dog</option>
-        <option value="cat">Cat</option>
-        <option value="hamster">Hamster</option>
-        <option value="parrot">Parrot</option>
-        <option value="spider">Spider</option>
-        <option value="goldfish">Goldfish</option>
-    </Select>
-    <Select name="niveau-scolaire">
-        <option value="">Niveau Scolaire</option>
-        <option value="dog">Dog</option>
-        <option value="cat">Cat</option>
-        <option value="hamster">Hamster</option>
-        <option value="parrot">Parrot</option>
-        <option value="spider">Spider</option>
-        <option value="goldfish">Goldfish</option>
-    </Select>
-    <Select name="theme">
-        <option value="">Thème</option>
-        <option value="dog">Dog</option>
-        <option value="cat">Cat</option>
-        <option value="hamster">Hamster</option>
-        <option value="parrot">Parrot</option>
-        <option value="spider">Spider</option>
-        <option value="goldfish">Goldfish</option>
-    </Select>
-    <Select name="chapitre">
-        <option value="">Chapitre</option>
-        <option value="dog">Dog</option>
-        <option value="cat">Cat</option>
-        <option value="hamster">Hamster</option>
-        <option value="parrot">Parrot</option>
-        <option value="spider">Spider</option>
-        <option value="goldfish">Goldfish</option>
-    </Select>
+    <Select name="session" options="optionsSession" />
+    <Select name="niveau-scolaire" options="optionsNiveauScolaire" />
+    <Select name="theme" options="optionsTheme" />
+    <Select name="chapitre" options="optionsChapitre" />
   </header>
 </template>
 

@@ -1,8 +1,6 @@
 <template>
   <div class="select">
-    <select :name="name" ref="selectRef" @focus="onFocus" @change="onChange">
-      <slot />
-    </select>
+    <select :name="name"></select>
     <font-awesome-icon
       :class="['font_awesome', { rotated: isOpen }]"
       icon="fa-solid fa-circle-chevron-down"
@@ -11,19 +9,8 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
-const { name } = defineProps(['name'])
-
-const isOpen = ref(false)
-const selectRef = ref(null)
-
-const onFocus = () => {
-  isOpen.value = true
-}
-
-const onChange = () => {
-  isOpen.value = false
-}
+import { ref } from 'vue'
+const { name, options } = defineProps(['name', 'options'])
 </script>
 
 <style scoped>
@@ -54,7 +41,7 @@ select {
   pointer-events: none;
   transition: transform 0.2s ease-in-out;
 }
-.rotated {
+/* .rotated {
   transform: rotate(180deg);
-}
+} */
 </style>
