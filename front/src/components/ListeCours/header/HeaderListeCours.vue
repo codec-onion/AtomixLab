@@ -5,11 +5,25 @@
     <Select name="niveau-scolaire" options="optionsNiveauScolaire" />
     <Select name="theme" options="optionsTheme" />
     <Select name="chapitre" options="optionsChapitre" />
+    <p>{{ donneesSession }}</p>
   </header>
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import Select from './Select.vue';
+import { getSessions } from '@/_services/donnees'
+
+const donneesSession = ref(null)
+// const sessions = 
+
+onMounted(async () => {
+  try {
+    donneesSession.value = await getSessions()
+  } catch (error) {
+    console.error(error.message)
+  }
+})
 
 </script>
 

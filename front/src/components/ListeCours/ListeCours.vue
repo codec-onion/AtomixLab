@@ -1,11 +1,11 @@
 <template>
   <section class="margin_section">
-    <Header />
+    <HeaderListeCours />
   </section>
 </template>
 
 <script setup>
-import Header from './header/Header.vue';
+import HeaderListeCours from './header/HeaderListeCours.vue';
 </script>
 
 <style scoped>

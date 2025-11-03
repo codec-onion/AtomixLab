@@ -2,7 +2,7 @@
   <div class="select">
     <select :name="name"></select>
     <font-awesome-icon
-      :class="['font_awesome', { rotated: isOpen }]"
+      :class="['font_awesome']"
       icon="fa-solid fa-circle-chevron-down"
     />
   </div>
