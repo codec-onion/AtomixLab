@@ -1,25 +1,22 @@
 <template>
   <header>
     <div class="line"></div>
-    <Select name="session" options="optionsSession" />
-    <Select name="niveau-scolaire" options="optionsNiveauScolaire" />
-    <Select name="theme" options="optionsTheme" />
-    <Select name="chapitre" options="optionsChapitre" />
-    <p>{{ donneesSession }}</p>
+    <Select name="session" :options="optionsSession" />
+    <Select name="niveau-scolaire" :options="optionsNiveauScolaire" />
+    <Select name="theme" :options="optionsTheme" />
+    <Select name="chapitre" :options="optionsChapitre" />
   </header>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-import Select from './Select.vue';
-import { getSessions } from '@/_services/donnees'
+import { ref, onMounted, computed } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useDonnesStore } from '@/stores/donnes'
+import Select from './Select.vue'
 
-const donneesSession = ref(null)
-// const sessions = 
+const donneesStore = useDonnesStore()
+const { sessions, cours } = storeToRefs(donneesStore)
 
-onMounted(async () => {
-  donneesSession.value = await getSessions()
-})
 
 </script>
 

@@ -5,7 +5,17 @@
 </template>
 
 <script setup>
-import HeaderListeCours from './header/HeaderListeCours.vue';
+import { ref, onMounted } from 'vue'
+import { storeToRefs } from 'pinia'
+import HeaderListeCours from './header/HeaderListeCours.vue'
+import { getSessions } from '@/_services/donnees.service'
+import { useDonnesStore } from '@/stores/donnes'
+
+const donneesStore = useDonnesStore()
+
+onMounted(async () => {
+  await donneesStore.loadDatas()
+})
 </script>
 
 <style scoped>
