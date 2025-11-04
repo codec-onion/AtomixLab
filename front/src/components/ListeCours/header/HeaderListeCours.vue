@@ -18,11 +18,7 @@ const donneesSession = ref(null)
 // const sessions = 
 
 onMounted(async () => {
-  try {
-    donneesSession.value = await getSessions()
-  } catch (error) {
-    console.error(error.message)
-  }
+  donneesSession.value = await getSessions()
 })
 
 </script>
