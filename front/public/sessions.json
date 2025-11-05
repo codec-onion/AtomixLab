@@ -1,6 +1,6 @@
 [
   {
-    "_id": ObjectId("6544c6d81a2f4e1a9e4b1001"),
+    "_id": "6544c6d81a2f4e1a9e4b1001",
     "name": "2020-2021",
     "niveauxScolaire": [
       { "id": "7b2d4b6e-1c3b-4a2d-83e2-63f1a8f61c10", "name": "Seconde Générale" },
@@ -13,7 +13,7 @@
     ]
   },
   {
-    "_id": ObjectId("6544c6d81a2f4e1a9e4b1002"),
+    "_id": "6544c6d81a2f4e1a9e4b1002",
     "name": "2021-2022",
     "niveauxScolaire": [
       { "id": "cb713fc1-4081-4706-9211-06dc261ba78a", "name": "Seconde Générale" },
@@ -26,7 +26,7 @@
     ]
   },
   {
-    "_id": ObjectId("6544c6d81a2f4e1a9e4b1003"),
+    "_id": "6544c6d81a2f4e1a9e4b1003",
     "name": "2022-2023",
     "niveauxScolaire": [
       { "id": "b4d3a55c-bbfa-4e1a-b4b9-43fdc6e4fda4", "name": "Seconde Générale" },
@@ -39,7 +39,7 @@
     ]
   },
   {
-    "_id": ObjectId("6544c6d81a2f4e1a9e4b1004"),
+    "_id": "6544c6d81a2f4e1a9e4b1004",
     "name": "2023-2024",
     "niveauxScolaire": [
       { "id": "c5f0d5a1-dcfb-42c0-b8f5-334aaea3b7f8", "name": "Seconde Générale" },
@@ -52,7 +52,7 @@
     ]
   },
   {
-    "_id": ObjectId("6544c6d81a2f4e1a9e4b1005"),
+    "_id": "6544c6d81a2f4e1a9e4b1005",
     "name": "2024-2025",
     "niveauxScolaire": [
       { "id": "b037c5b9-f21a-4ff4-b7f8-26e21b13f67f", "name": "Seconde Générale" },

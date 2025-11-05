@@ -2,11 +2,9 @@
   <div class="select">
     <select :name="name">
       <option value="">{{ placeHolder }}</option>
+      <option v-for="option in options" :value="option">{{ option }}</option>
     </select>
-    <font-awesome-icon
-      :class="['font_awesome']"
-      icon="fa-solid fa-circle-chevron-down"
-    />
+    <font-awesome-icon :class="['font_awesome']" icon="fa-solid fa-circle-chevron-down" />
   </div>
 </template>
 
