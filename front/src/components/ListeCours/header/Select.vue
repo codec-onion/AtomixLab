@@ -1,6 +1,8 @@
 <template>
   <div class="select">
-    <select :name="name"></select>
+    <select :name="name">
+      <option value="">{{ placeHolder }}</option>
+    </select>
     <font-awesome-icon
       :class="['font_awesome']"
       icon="fa-solid fa-circle-chevron-down"
@@ -10,7 +12,7 @@
 
 <script setup>
 import { ref } from 'vue'
-const { name, options } = defineProps(['name', 'options'])
+const { name, placeHolder, options } = defineProps(['name', 'placeHolder', 'options'])
 </script>
 
 <style scoped>

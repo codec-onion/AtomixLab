@@ -1,10 +1,10 @@
 <template>
   <header>
     <div class="line"></div>
-    <Select name="session" :options="optionsSession" />
-    <Select name="niveau-scolaire" :options="optionsNiveauScolaire" />
-    <Select name="theme" :options="optionsTheme" />
-    <Select name="chapitre" :options="optionsChapitre" />
+    <Select name="session" placeHolder="Session" :options="optionsSession" />
+    <Select name="niveau-scolaire" placeHolder="Niveau scolaire" :options="optionsNiveauScolaire" />
+    <Select name="theme" placeHolder="Thème" :options="optionsTheme" />
+    <Select name="chapitre" placeHolder="Chapitre" :options="optionsChapitre" />
   </header>
 </template>
 
@@ -16,7 +16,14 @@ import Select from './Select.vue'
 
 const donneesStore = useDonnesStore()
 const { sessions, cours } = storeToRefs(donneesStore)
-
+const optionsSession = computed(() => {
+  const retour = donneesStore.sessions.map(el => el.name)
+  console.log(retour)
+  return retour
+})
+const optionsNiveauScolaire = ref([])
+const optionsTheme = ref([])
+const optionsChapitre = ref([])
 
 </script>
 
