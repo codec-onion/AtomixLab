@@ -4,7 +4,7 @@
     <Select name="session" placeHolder="Session" :options="optionsSession" />
     <Select name="niveau-scolaire" placeHolder="Niveau scolaire" :options="optionsNiveauScolaire" />
     <Select name="theme" placeHolder="Thème" :options="optionsTheme" />
-    <!-- <Select name="chapitre" placeHolder="Chapitre" :options="optionsChapitre" /> -->
+    <Select name="type" placeHolder="Type" :options="['Physique', 'Chimie', 'Rappel']" />
   </header>
 </template>
 
@@ -16,15 +16,13 @@ import Select from './Select.vue'
 
 const donneesStore = useDonnesStore()
 const { sessions, cours } = storeToRefs(donneesStore)
-console.log(sessions.value)
 const optionsSession = computed(() => sessions.value.map(el => el.name))
 const optionsNiveauScolaire = computed(() => {
   const niveauxScolaire = new Set([])
   sessions.value.forEach(session => session.niveauxScolaire.forEach(niveauScolaire => niveauxScolaire.add(niveauScolaire.name)))
   return [...niveauxScolaire]
 })
-const optionsTheme = computed(() => donneesStore.sessions.map(el => el.name))
-// const optionsChapitre = computed(() => donneesStore.sessions.map(el => el.name))
+const optionsTheme = computed(() => cours.value.map(el => el.title))
 
 </script>
 

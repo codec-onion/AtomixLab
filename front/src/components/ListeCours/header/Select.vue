@@ -2,7 +2,7 @@
   <div class="select">
     <select :name="name">
       <option value="">{{ placeHolder }}</option>
-      <option v-for="option in options" :value="option">{{ option }}</option>
+      <option v-for="option in options" :value="option" :key="option">{{ option }}</option>
     </select>
     <font-awesome-icon :class="['font_awesome']" icon="fa-solid fa-circle-chevron-down" />
   </div>
@@ -19,19 +19,19 @@ const { name, placeHolder, options } = defineProps(['name', 'placeHolder', 'opti
   display: inline-block;
   margin-bottom: 20px;
 }
-.select:not(.select:nth-child(5)) {
+.select:not(:nth-last-child(-n + 1 of .select)) {
   margin-right: 20px;
 }
 select {
-  width: 250px;
   height: 40px;
+  padding: 0 45px 0 10px;
   border-radius: 20px;
   text-align: center;
   font-family: var(--font-family-title3_4_text);
   font-size: var(--font-size-text-primary-desktop);
   color: var(--color-secondary);
   appearance: none;
-  border: none;
+  border: 1px solid black;
 }
 .font_awesome {
   color: var(--color-icons);
