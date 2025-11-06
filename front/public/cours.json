@@ -2,7 +2,7 @@
   {
     "_id": "6544d7f91a2f4e1a9e4b2001",
     "title": "Constitution et transformations de la matière",
-    "sessionIds": ["session_2024_1"],
+    "sessionIds": ["6544c6d81a2f4e1a9e4b1001"],
     "niveauScolaireIds": ["7b2d4b6e-1c3b-4a2d-83e2-63f1a8f61c10"], 
     "chapitres": [
       "Constitution de la matière",
@@ -31,7 +31,7 @@
   {
     "_id": "6544d7f91a2f4e1a9e4b2002",
     "title": "Les mouvements et les forces",
-    "sessionIds": ["session_2024_2"],
+    "sessionIds": ["6544c6d81a2f4e1a9e4b1001"],
     "niveauScolaireIds": ["cb713fc1-4081-4706-9211-06dc261ba78a"],
     "chapitres": [
       "Description du mouvement",
@@ -60,7 +60,7 @@
   {
     "_id": "6544d7f91a2f4e1a9e4b2003",
     "title": "L’énergie et ses conversions",
-    "sessionIds": ["session_2024_3"],
+    "sessionIds": ["6544c6d81a2f4e1a9e4b1002"],
     "niveauScolaireIds": ["b4d3a55c-bbfa-4e1a-b4b9-43fdc6e4fda4"],
     "chapitres": [
       "Notion d’énergie",
@@ -95,7 +95,7 @@
   {
     "_id": "6544d7f91a2f4e1a9e4b2004",
     "title": "Ondes et signaux",
-    "sessionIds": ["session_2024_4"],
+    "sessionIds": ["6544c6d81a2f4e1a9e4b1002"],
     "niveauScolaireIds": ["1b7e5a1c-c3a2-4d61-a80e-91dc221b7549"],
     "chapitres": [
       "Phénomènes périodiques",
@@ -124,7 +124,7 @@
   {
     "_id": "6544d7f91a2f4e1a9e4b2005",
     "title": "L’électricité au quotidien",
-    "sessionIds": ["session_2024_5"],
+    "sessionIds": ["6544c6d81a2f4e1a9e4b1003"],
     "niveauScolaireIds": ["c5f0d5a1-dcfb-42c0-b8f5-334aaea3b7f8"],
     "chapitres": [
       "Grandeurs électriques",
@@ -153,7 +153,7 @@
   {
     "_id": "6544d7f91a2f4e1a9e4b2006",
     "title": "Changements d’états et énergie thermique",
-    "sessionIds": ["session_2024_6"],
+    "sessionIds": ["6544c6d81a2f4e1a9e4b1003"],
     "niveauScolaireIds": ["2a90e67a-9e17-4a8b-bb3b-3c741e70383e"],
     "chapitres": [
       "Solide, liquide, gaz",
@@ -182,7 +182,7 @@
   {
     "_id": "6544d7f91a2f4e1a9e4b2007",
     "title": "La chimie au service de la santé",
-    "sessionIds": ["session_2024_7"],
+    "sessionIds": ["6544c6d81a2f4e1a9e4b1004"],
     "niveauScolaireIds": ["27e381a7-65cb-46e8-86a0-94a63a4d33ab"],
     "chapitres": [
       "Médicaments et molécules actives",
@@ -211,7 +211,7 @@
   {
     "_id": "6544d7f91a2f4e1a9e4b2008",
     "title": "Réactions acide-base et pH",
-    "sessionIds": ["session_2024_8"],
+    "sessionIds": ["6544c6d81a2f4e1a9e4b1004"],
     "niveauScolaireIds": ["75f17cb0-8894-4d0a-9436-7b0296b4d36c"],
     "chapitres": [
       "Définition d’un acide et d’une base",
@@ -240,7 +240,7 @@
   {
     "_id": "6544d7f91a2f4e1a9e4b2009",
     "title": "L’univers et la lumière",
-    "sessionIds": ["session_2024_9"],
+    "sessionIds": ["6544c6d81a2f4e1a9e4b1005"],
     "niveauScolaireIds": ["b037c5b9-f21a-4ff4-b7f8-26e21b13f67f"],
     "chapitres": [
       "Sources de lumière",
@@ -263,7 +263,7 @@
   {
     "_id": "6544d7f91a2f4e1a9e4b2010",
     "title": "Électricité et énergie domestique",
-    "sessionIds": ["session_2024_10"],
+    "sessionIds": ["6544c6d81a2f4e1a9e4b1005"],
     "niveauScolaireIds": ["2e50b61e-5909-49b9-8a60-73e33177f00c"],
     "chapitres": [
       "Courant alternatif et continu",
