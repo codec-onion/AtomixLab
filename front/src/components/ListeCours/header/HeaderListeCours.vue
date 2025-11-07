@@ -4,7 +4,6 @@
     <Select name="session" placeHolder="Session" :options="optionsSession" />
     <Select name="niveau-scolaire" placeHolder="Niveau scolaire" :options="optionsNiveauScolaire" />
     <Select name="theme" placeHolder="Thème" :options="optionsTheme" />
-    <Select name="type" placeHolder="Type" :options="['Physique', 'Chimie', 'Rappel']" />
   </header>
 </template>
 
@@ -15,18 +14,31 @@ import { useDonnesStore } from '@/stores/donnes'
 import Select from './Select.vue'
 
 const donneesStore = useDonnesStore()
-const { sessions, cours } = storeToRefs(donneesStore)
-const optionsSession = computed(() => sessions.value.map(el => el.name))
+const { cours } = storeToRefs(donneesStore)
+const optionsSession = computed(() => {
+  const sessions = new Set([])
+  cours.value.forEach((el) => sessions.add(el.sessions))
+  return [...sessions]
+})
 const optionsNiveauScolaire = computed(() => {
   const niveauxScolaire = new Set([])
-  sessions.value.forEach(session => session.niveauxScolaire.forEach(niveauScolaire => niveauxScolaire.add(niveauScolaire.name)))
+  cours.value.forEach((el) => niveauxScolaire.add(el.niveauScolaire))
   return [...niveauxScolaire]
 })
-const optionsTheme = computed(() => cours.value.map(el => el.title))
-
+const optionsTheme = computed(() => {
+  const thematiques = new Set([])
+  cours.value.forEach((el) => thematiques.add(el.thematique))
+  return [...thematiques]
+})
 </script>
 
 <style scoped>
+header {
+  margin-bottom: 50px;
+  position: relative;
+  padding: 20px;
+  background: linear-gradient(var(--color-primary), var(--color-tertiary));
+}
 .line {
   position: absolute;
   top: 0;

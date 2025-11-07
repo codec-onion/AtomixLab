@@ -9,6 +9,24 @@ export const getSessions = async () => {
   }
 }
 
+// export const getNiveauxScolaire = async () => {
+//   try {
+//     const res = await Axios.get("/sessions.json")
+//     return res.data
+//   } catch (error) {
+//     console.error(error)
+//   }
+// }
+
+// export const getThematique = async () => {
+//   try {
+//     const res = await Axios.get("/sessions.json")
+//     return res.data
+//   } catch (error) {
+//     console.error(error)
+//   }
+// }
+
 export const getCours = async () => {
   try {
     const res = await Axios.get("/cours.json")

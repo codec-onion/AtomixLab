@@ -1,7 +1,9 @@
 <template>
   <section class="margin_section">
     <HeaderListeCours />
-    <Cours v-for="c in cours" :key="c._id" :session="getSessionDuCours(c)"/>
+    <div class="cours">
+      <Cours v-for="c in cours" :key="c._id" :infosCours="getInfosCours(c)"/>
+    </div>
   </section>
 </template>
 
@@ -13,10 +15,17 @@ import HeaderListeCours from './header/HeaderListeCours.vue'
 import Cours from './Cours.vue'
 
 const donneesStore = useDonnesStore()
-const { sessions, cours } = storeToRefs(donneesStore)
+const { cours } = storeToRefs(donneesStore)
 
-const getSessionDuCours = (cours) => {
-  
+const getInfosCours = (cours) => {
+  const infosCours = {
+    session: cours.session,
+    niveauScolaire: cours.niveauScolaire,
+    thematique: cours.thematique,
+    type: cours.type,
+    title: cours.title
+  }
+  return infosCours
 }
 
 onMounted(async () => {
@@ -25,10 +34,15 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-section {
+/* section {
   margin-bottom: 50px;
   position: relative;
   padding: 20px;
   background: linear-gradient(var(--color-primary), var(--color-tertiary));
+} */
+.cours {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 </style>

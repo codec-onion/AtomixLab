@@ -1,0 +1,17 @@
+[
+  {
+    "id": "t1a2b3c4-1111-4444-8888-aaaaaaaaaaaa",
+    "title": "Constitution et transformations de la matière",
+    "description": "Thématique centrée sur la structure et les réactions de la matière."
+  },
+  {
+    "id": "t2b3c4d5-2222-5555-9999-bbbbbbbbbbbb",
+    "title": "Énergie, mouvement et ondes",
+    "description": "Thématique couvrant énergie, forces, mouvement et phénomènes ondulatoires."
+  },
+  {
+    "id": "t3c4d5e6-3333-6666-aaaa-cccccccccccc",
+    "title": "Électricité et chimie appliquée",
+    "description": "Thématique sur l’électricité, les circuits et applications chimiques."
+  }
+]
