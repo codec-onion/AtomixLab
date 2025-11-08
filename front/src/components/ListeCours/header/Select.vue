@@ -29,6 +29,7 @@ select {
   text-align: center;
   font-family: var(--font-family-title3_4_text);
   font-size: var(--font-size-text-primary-desktop);
+  background-color: white;
   color: var(--color-secondary);
   appearance: none;
   border: 1px solid black;

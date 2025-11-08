@@ -17,7 +17,7 @@ const donneesStore = useDonnesStore()
 const { cours } = storeToRefs(donneesStore)
 const optionsSession = computed(() => {
   const sessions = new Set([])
-  cours.value.forEach((el) => sessions.add(el.sessions))
+  cours.value.forEach((el) => sessions.add(el.session))
   return [...sessions]
 })
 const optionsNiveauScolaire = computed(() => {

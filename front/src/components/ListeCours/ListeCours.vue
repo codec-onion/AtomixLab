@@ -34,12 +34,6 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-/* section {
-  margin-bottom: 50px;
-  position: relative;
-  padding: 20px;
-  background: linear-gradient(var(--color-primary), var(--color-tertiary));
-} */
 .cours {
   display: flex;
   flex-wrap: wrap;
