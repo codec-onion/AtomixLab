@@ -1,6 +1,10 @@
 <template>
   <div class="select">
-    <select :name="name">
+    <select v-if="defaultValue" :name="name" v-model="selectedValue">
+      <option value="">{{ placeHolder }}</option>
+      <option v-for="option in options" :value="option" :key="option">{{ option }}</option>
+    </select>
+    <select v-else :name="name">
       <option value="">{{ placeHolder }}</option>
       <option v-for="option in options" :value="option" :key="option">{{ option }}</option>
     </select>
@@ -9,8 +13,12 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-const { name, placeHolder, options } = defineProps(['name', 'placeHolder', 'options'])
+import { ref, computed, watch } from 'vue'
+const { name, placeHolder, options, defaultValue } = defineProps(['name', 'placeHolder', 'options', 'defaultValue'])
+const selectedValue = ref(null)
+watch(() => defaultValue, (newSession) => {
+  selectedValue.value = newSession;
+}, { immediate: true })
 </script>
 
 <style scoped>

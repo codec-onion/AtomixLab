@@ -3,7 +3,7 @@
     <a href="#">
       <div class="header">
         <div class="session_niveau">
-          <p class="niveau-scolaire">{{ infosCours.niveauScolaire }}</p>
+          <p class="niveau_scolaire">{{ infosCours.niveauScolaire }}</p>
           <p class="session">{{ infosCours.session }}</p>
         </div>
         <div class="type">
@@ -22,8 +22,8 @@
         </div>
       </div>
 
-      <p class="theme">{{ infosCours.thematique }}</p>
-      <p class="title">{{ infosCours.title }}</p>
+      <p class="theme">Thème: {{ infosCours.thematique }}</p>
+      <h2 class="title">{{ infosCours.title }}</h2>
       <p class="infos">Cliquez sur la carte pour télécharger</p>
       <font-awesome-icon class="icon" icon="fa-solid fa-graduation-cap" />
     </a>
@@ -40,6 +40,8 @@ a {
   position: relative;
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-between;
   width: 350px;
   height: 350px;
   background-color: var(--color-primary);
@@ -65,7 +67,10 @@ a:hover {
   color: var(--color-tertiary);
   filter: blur(3px);
 }
-p, .type_icon {
+p,
+.type_icon,
+h2,
+h3 {
   z-index: 1;
 }
 .header {
@@ -82,9 +87,24 @@ p, .type_icon {
 }
 .type {
   align-items: center;
+  font-size: var(--font-size-text-secondary-desktop);
 }
 .type_icon {
-  font-size: 80px;
+  font-size: 60px;
   color: var(--color-icons);
+}
+.niveau_scolaire, .theme {
+  font-size: var(--font-size-text-primary-desktop);
+}
+.session,
+.infos {
+  font-size: var(--font-size-text-secondary-desktop);
+}
+.infos {
+  text-align: center;
+}
+h2 {
+  font-size: 36px;
+  font-weight: bold;
 }
 </style>

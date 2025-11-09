@@ -1,7 +1,7 @@
 <template>
   <header>
     <div class="line"></div>
-    <Select name="session" placeHolder="Session" :options="optionsSession" />
+    <Select name="session" placeHolder="Session" :defaultValue="defaultValueSession" :options="optionsSession" />
     <Select name="niveau-scolaire" placeHolder="Niveau scolaire" :options="optionsNiveauScolaire" />
     <Select name="theme" placeHolder="Thème" :options="optionsTheme" />
   </header>
@@ -13,12 +13,27 @@ import { storeToRefs } from 'pinia'
 import { useDonnesStore } from '@/stores/donnes'
 import Select from './Select.vue'
 
+const defaultValueSession = ref(null)
+
 const donneesStore = useDonnesStore()
 const { cours } = storeToRefs(donneesStore)
+
 const optionsSession = computed(() => {
-  const sessions = new Set([])
+  let sessions = new Set([])
   cours.value.forEach((el) => sessions.add(el.session))
-  return [...sessions]
+  sessions = [...sessions].sort()
+  const now = new Date().getTime()
+  for (let session of sessions) {
+    const sessionsArray = session.split("-")
+    const startSession = new Date(sessionsArray[0], 6).getTime()
+    const endSession = new Date(sessionsArray[1], 5, 30).getTime()
+    if (now >= startSession && now <= endSession) {
+      defaultValueSession.value = session
+      break
+    }
+  }
+  if (!defaultValueSession.value) defaultValueSession.value = sessions[sessions.length - 1]
+  return sessions
 })
 const optionsNiveauScolaire = computed(() => {
   const niveauxScolaire = new Set([])
