@@ -27,6 +27,11 @@ app.use(
   })
 )
 
+// Health check endpoint (for monitoring services like Render)
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() })
+})
+
 // Route de test
 app.get('/', (req, res) => {
   res.json({
@@ -60,9 +65,15 @@ app.use(errorHandler)
 
 // Démarrer le serveur
 const PORT = process.env.PORT || 3000
+const isProduction = process.env.NODE_ENV === 'production'
 
 app.listen(PORT, () => {
   console.log(`🚀 Serveur démarré sur le port ${PORT}`)
   console.log(`📍 Mode: ${process.env.NODE_ENV || 'development'}`)
-  console.log(`🌐 URL: http://localhost:${PORT}`)
+
+  if (!isProduction) {
+    console.log(`🌐 URL locale: http://localhost:${PORT}`)
+  } else {
+    console.log(`🌐 Serveur en production - Health check: /health`)
+  }
 })

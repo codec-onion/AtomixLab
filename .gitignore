@@ -15,7 +15,8 @@ coverage
 *.local
 
 # Editor directories and files
-/front/.vscode/*
+.vscode/*
+front/.vscode/*
 !.vscode/extensions.json
 .idea
 *.suo

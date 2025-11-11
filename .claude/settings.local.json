@@ -4,7 +4,8 @@
       "Bash(cd:*)",
       "Bash(npm init:*)",
       "Bash(npm install:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(git rm:*)"
     ],
     "deny": [],
     "ask": []
