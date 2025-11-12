@@ -28,8 +28,43 @@ app.use(
 )
 
 // Health check endpoint (for monitoring services like Render)
-app.get('/health', (req, res) => {
-  res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() })
+app.get('/health', async (req, res) => {
+  try {
+    // Tester la connexion MongoDB
+    await mongoose.connection.db.admin().ping()
+
+    res.status(200).json({
+      status: 'ok',
+      timestamp: new Date().toISOString(),
+      database: 'connected',
+      uptime: process.uptime(),
+    })
+  } catch (error) {
+    console.error('❌ Health check failed:', error.message)
+    res.status(503).json({
+      status: 'error',
+      timestamp: new Date().toISOString(),
+      database: 'disconnected',
+      error: error.message,
+    })
+  }
+})
+
+// Keep-alive endpoint (optimized for cron jobs)
+app.get('/keep-alive', async (req, res) => {
+  try {
+    // Ping rapide de la DB pour maintenir la connexion active
+    await mongoose.connection.db.admin().ping()
+
+    // Log minimal pour éviter de surcharger les logs
+    if (process.env.NODE_ENV !== 'production') {
+      console.log(`🔄 Keep-alive ping reçu à ${new Date().toISOString()}`)
+    }
+
+    res.status(200).json({ alive: true })
+  } catch (error) {
+    res.status(503).json({ alive: false, error: error.message })
+  }
 })
 
 // Route de test
