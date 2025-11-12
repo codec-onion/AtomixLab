@@ -5,15 +5,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Project Overview
 
 AtomixLab is a monorepo project for archiving and consulting courses for a professor. It consists of:
-- **Frontend**: Vue 3 + Vite SPA for displaying and filtering courses
-- **Backend**: (To be implemented) - will provide API for course management
+- **Frontend**: Vue 3 + Vite SPA for displaying and filtering courses (deployed on Vercel)
+- **Backend**: Express 5 + MongoDB API for course management (deployed on Render)
 
 ## Repository Structure
 
 ```
 /
 ├── front/          → Vue 3 frontend application
-├── backend/        → Backend API (empty - to be implemented)
+├── backend/        → Express 5 + MongoDB API
 └── README.md       → Project documentation
 ```
 
@@ -156,6 +156,10 @@ src/
 
 ### API Endpoints
 
+**Monitoring** (Public):
+- `GET /health` - Health check endpoint with MongoDB connection test (returns status, database state, uptime)
+- `GET /keep-alive` - Lightweight keep-alive endpoint for cron jobs (minimal logging, fast response)
+
 **Authentication** (Public):
 - `POST /api/auth/register` - User registration (returns JWT)
 - `POST /api/auth/login` - User login (returns JWT)
@@ -216,6 +220,18 @@ See `.env.example`:
 - Creates admin user: `admin@atomixlab.com` / `admin123`
 - Transforms mock data to match Mongoose schema
 
+**Database Connection (config/db.js):**
+- **Connection Options**:
+  - `serverSelectionTimeoutMS: 5000` - Timeout for server selection
+  - `socketTimeoutMS: 45000` - Timeout for socket operations
+  - `maxPoolSize: 10` - Maximum connections in pool
+  - `minPoolSize: 2` - Minimum connections to maintain (keeps DB connection alive)
+- **Event Handlers**:
+  - `disconnected` - Logs warning and triggers automatic reconnection
+  - `reconnected` - Logs successful reconnection
+  - `error` - Logs MongoDB errors for debugging
+- **Automatic Reconnection**: Mongoose handles reconnection internally with the configured options
+
 **Security:**
 - Passwords hashed with bcrypt (salt rounds: 10)
 - JWT tokens for stateless authentication
@@ -234,6 +250,16 @@ See `.env.example`:
 - ES modules (`"type": "module"` in package.json)
 - Express-validator for request validation
 - Consistent error response format: `{ success, message, data }`
+
+**High Availability & Monitoring:**
+- **Keep-Alive Strategy**: `/keep-alive` endpoint pinged every 7 minutes by cron-job.org to prevent Render free tier from sleeping
+- **MongoDB Connection Resilience**:
+  - `serverSelectionTimeoutMS: 5000` - Quick server selection
+  - `socketTimeoutMS: 45000` - Prevents premature socket timeouts
+  - `maxPoolSize: 10` / `minPoolSize: 2` - Connection pooling to maintain active connections
+  - Event listeners for `disconnected`, `reconnected`, `error` with automatic reconnection
+- **Health Monitoring**: `/health` endpoint tests MongoDB connectivity and returns uptime metrics
+- **Production Deployment**: Render (backend), Vercel (frontend), MongoDB Atlas (database)
 
 ### Integration with Frontend
 
@@ -267,4 +293,3 @@ This is a course archiving and consultation platform for educational purposes. T
 - **Levels**: Educational levels (e.g., "Seconde", "Première")
 - **Themes**: Subject topics within physics/chemistry
 - **Course Types**: Different formats with associated FontAwesome icons (documents, videos, exercises, etc.)
-
