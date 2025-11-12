@@ -5,6 +5,7 @@ import connectDB from './config/db.js'
 import authRoutes from './routes/auth.js'
 import courseRoutes from './routes/courses.js'
 import { notFound, errorHandler } from './middlewares/errorHandler.js'
+import mongoose from 'mongoose'
 
 // Charger les variables d'environnement
 dotenv.config()
