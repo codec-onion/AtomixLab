@@ -14,6 +14,17 @@ dist-ssr
 coverage
 *.local
 
+# Environment variables
+.env
+*.env
+!.env.example
+
+# Deployment files
+vercel.json
+render.yaml
+render.json
+**/DEPLOYMENT.md
+
 # Editor directories and files
 .vscode/*
 front/.vscode/*
