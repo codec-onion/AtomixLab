@@ -19,8 +19,7 @@ coverage
 *.env
 !.env.example
 
-# Deployment files
-vercel.json
+# Deployment files (keep vercel.json for SPA routing)
 render.yaml
 render.json
 **/DEPLOYMENT.md
