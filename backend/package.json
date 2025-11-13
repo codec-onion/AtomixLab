@@ -11,7 +11,11 @@
     "lint": "eslint src/",
     "format": "prettier --write src/"
   },
-  "keywords": ["education", "courses", "api"],
+  "keywords": [
+    "education",
+    "courses",
+    "api"
+  ],
   "author": "",
   "license": "ISC",
   "description": "API REST pour la gestion de cours - AtomixLab",
@@ -25,7 +29,8 @@
     "express": "^5.1.0",
     "express-validator": "^7.3.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.19.3"
+    "mongoose": "^8.19.3",
+    "morgan": "^1.10.1"
   },
   "devDependencies": {
     "eslint": "^9.39.1",

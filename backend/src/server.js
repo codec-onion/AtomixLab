@@ -1,6 +1,7 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors'
+import morgan from 'morgan'
 import connectDB from './config/db.js'
 import authRoutes from './routes/auth.js'
 import courseRoutes from './routes/courses.js'
@@ -28,6 +29,30 @@ app.use(
   })
 )
 
+// Configuration du logging HTTP avec Morgan
+// Format personnalisé : méthode, URL, status, temps de réponse, User-Agent, IP
+morgan.token('user-agent', (req) => req.get('User-Agent') || 'N/A')
+morgan.token('real-ip', (req) =>
+  req.headers['x-forwarded-for'] ||
+  req.headers['x-real-ip'] ||
+  req.socket.remoteAddress ||
+  'N/A'
+)
+
+// Format différent selon l'environnement
+if (process.env.NODE_ENV === 'production') {
+  // Production : format compact avec User-Agent et IP
+  app.use(
+    morgan(':method :url :status :res[content-length] - :response-time ms | UA: :user-agent | IP: :real-ip')
+  )
+} else {
+  // Développement : format coloré avec plus de détails
+  app.use(morgan('dev'))
+  app.use(
+    morgan(':method :url :status - :response-time ms | User-Agent: :user-agent | IP: :real-ip')
+  )
+}
+
 // Health check endpoint (for monitoring services like Render)
 app.get('/health', async (req, res) => {
   try {
@@ -53,17 +78,39 @@ app.get('/health', async (req, res) => {
 
 // Keep-alive endpoint (optimized for cron jobs)
 app.get('/keep-alive', async (req, res) => {
+  const timestamp = new Date().toISOString()
+  const userAgent = req.get('User-Agent') || 'N/A'
+  const ip = req.headers['x-forwarded-for'] ||
+             req.headers['x-real-ip'] ||
+             req.socket.remoteAddress ||
+             'N/A'
+  const uptime = process.uptime()
+  const isColdStart = uptime < 60 // Moins de 60 secondes = probable cold start
+
   try {
     // Ping rapide de la DB pour maintenir la connexion active
     await mongoose.connection.db.admin().ping()
 
-    // Log minimal pour éviter de surcharger les logs
-    if (process.env.NODE_ENV !== 'production') {
-      console.log(`🔄 Keep-alive ping reçu à ${new Date().toISOString()}`)
-    }
+    // Log détaillé pour diagnostiquer les problèmes de cron
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+    console.log(`🔄 KEEP-ALIVE PING REÇU`)
+    console.log(`⏰ Timestamp: ${timestamp}`)
+    console.log(`🌐 IP Source: ${ip}`)
+    console.log(`🤖 User-Agent: ${userAgent}`)
+    console.log(`⚡ Uptime: ${Math.floor(uptime)}s ${isColdStart ? '(COLD START)' : '(running)'}`)
+    console.log(`✅ MongoDB: Connected`)
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
 
     res.status(200).json({ alive: true })
   } catch (error) {
+    console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+    console.error(`❌ KEEP-ALIVE FAILED`)
+    console.error(`⏰ Timestamp: ${timestamp}`)
+    console.error(`🌐 IP Source: ${ip}`)
+    console.error(`🤖 User-Agent: ${userAgent}`)
+    console.error(`💥 Error: ${error.message}`)
+    console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+
     res.status(503).json({ alive: false, error: error.message })
   }
 })
