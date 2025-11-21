@@ -1,10 +1,6 @@
 <template>
   <div class="select">
-    <select v-if="defaultValue" :name="name" v-model="selectedValue">
-      <option value="">{{ placeHolder }}</option>
-      <option v-for="option in options" :value="option" :key="option">{{ option }}</option>
-    </select>
-    <select v-else :name="name">
+    <select :name="name" v-model="selectedValue">
       <option value="">{{ placeHolder }}</option>
       <option v-for="option in options" :value="option" :key="option">{{ option }}</option>
     </select>
@@ -14,11 +10,25 @@
 
 <script setup>
 import { ref, computed, watch } from 'vue'
+import { useFiltersStore } from '@/stores/filters'
 const { name, placeHolder, options, defaultValue } = defineProps(['name', 'placeHolder', 'options', 'defaultValue'])
-const selectedValue = ref(null)
+const filtersStore = useFiltersStore()
+
+const selectedValue = ref("")
 watch(() => defaultValue, (newSession) => {
-  selectedValue.value = newSession;
+  selectedValue.value = newSession || ""
 }, { immediate: true })
+
+watch(selectedValue, (newValue) => {
+  if (name === 'session') {
+    filtersStore.sessionFilter = newValue || null
+  } else if (name === 'niveau-scolaire') {
+    filtersStore.levelFilter = newValue || null
+  } else if (name === 'theme') {
+    filtersStore.themeFilter = newValue || null
+  }
+}, { immediate: true })
+
 </script>
 
 <style scoped>
