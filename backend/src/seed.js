@@ -1,3 +1,5 @@
+// A supprimer
+
 import dotenv from 'dotenv'
 import mongoose from 'mongoose'
 import Course from './models/Course.js'
