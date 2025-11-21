@@ -33,6 +33,7 @@
 <script setup>
 import { defineProps } from 'vue'
 const { infosCours } = defineProps(['infosCours'])
+//test
 </script>
 
 <style scoped>
