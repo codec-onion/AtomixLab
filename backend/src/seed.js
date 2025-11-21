@@ -1,4 +1,4 @@
-// A supprimer3
+// A supprimer
 
 import dotenv from 'dotenv'
 import mongoose from 'mongoose'
