@@ -15,14 +15,12 @@ const router = express.Router()
 // Validation rules pour la création/modification de cours
 const courseValidation = [
   body('title').trim().notEmpty().withMessage('Le titre est requis'),
-  body('thematiqueId').notEmpty().withMessage('La thématique ID est requise'),
   body('thematique').trim().notEmpty().withMessage('La thématique est requise'),
-  body('niveauScolaireId').notEmpty().withMessage('Le niveau scolaire ID est requis'),
   body('niveauScolaire').trim().notEmpty().withMessage('Le niveau scolaire est requis'),
   body('session').trim().notEmpty().withMessage('La session est requise'),
   body('type')
-    .isIn(['Chimie', 'Physique'])
-    .withMessage('Le type doit être "Chimie" ou "Physique"'),
+    .isIn(['Chimie', 'Physique', 'Rappel de connaissance'])
+    .withMessage('Le type doit être "Chimie" ou "Physique" ou "Rappel de connaissance"'),
 ]
 
 // Route pour les sessions (doit être avant /:id pour éviter les conflits)

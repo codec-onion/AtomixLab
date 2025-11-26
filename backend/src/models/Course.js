@@ -4,7 +4,7 @@ const updateHistorySchema = new mongoose.Schema(
   {
     type: {
       type: String,
-      enum: ['creation', 'modification', 'ajout', 'suppression'],
+      enum: ['modification'],
       required: true,
     },
     userId: {
@@ -31,25 +31,13 @@ const courseSchema = new mongoose.Schema(
       required: [true, 'Le titre est requis'],
       trim: true,
     },
-    thematiqueId: {
-      type: String,
-      required: [true, 'La thématique ID est requise'],
-    },
     thematique: {
       type: String,
       required: [true, 'La thématique est requise'],
     },
-    niveauScolaireId: {
-      type: String,
-      required: [true, 'Le niveau scolaire ID est requis'],
-    },
     niveauScolaire: {
       type: String,
       required: [true, 'Le niveau scolaire est requis'],
-    },
-    sessionIds: {
-      type: [String],
-      default: [],
     },
     session: {
       type: String,
@@ -57,7 +45,7 @@ const courseSchema = new mongoose.Schema(
     },
     type: {
       type: String,
-      enum: ['Chimie', 'Physique'],
+      enum: ['Chimie', 'Physique', 'Rappel de connaissance'],
       required: [true, 'Le type est requis'],
     },
     description: {

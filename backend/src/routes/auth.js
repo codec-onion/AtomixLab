@@ -9,8 +9,8 @@ const router = express.Router()
 const registerValidation = [
   body('email').isEmail().withMessage('Email invalide').normalizeEmail(),
   body('password')
-    .isLength({ min: 6 })
-    .withMessage('Le mot de passe doit contenir au moins 6 caractères'),
+    .isLength({ min: 8 })
+    .withMessage('Le mot de passe doit contenir au moins 8 caractères'),
 ]
 
 const loginValidation = [
