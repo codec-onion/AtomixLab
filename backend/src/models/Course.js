@@ -4,7 +4,7 @@ const updateHistorySchema = new mongoose.Schema(
   {
     type: {
       type: String,
-      enum: ['modification'],
+      enum: ['creation', 'modification', 'ajout', 'suppression'],
       required: true,
     },
     userId: {
@@ -32,25 +32,31 @@ const courseSchema = new mongoose.Schema(
       trim: true,
     },
     thematique: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Thematique',
       required: [true, 'La thématique est requise'],
     },
     niveauScolaire: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'NiveauScolaire',
       required: [true, 'Le niveau scolaire est requis'],
     },
     session: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Session',
       required: [true, 'La session est requise'],
     },
     type: {
       type: String,
-      enum: ['Chimie', 'Physique', 'Rappel de connaissance'],
       required: [true, 'Le type est requis'],
     },
     description: {
       type: String,
       default: '',
+    },
+    urlDownload: {
+      type: String,
+      required: [true, 'L\'url de téléchargement est requise']
     },
     creationDate: {
       type: String,
@@ -72,7 +78,7 @@ const courseSchema = new mongoose.Schema(
 )
 
 // Index pour améliorer les performances des recherches
-courseSchema.index({ title: 'text', thematique: 'text' })
+courseSchema.index({ title: 'text' })
 courseSchema.index({ session: 1, niveauScolaire: 1, type: 1 })
 
 const Course = mongoose.model('Course', courseSchema)

@@ -2,7 +2,9 @@
   <div class="select">
     <select :name="name" v-model="selectedValue">
       <option value="">{{ placeHolder }}</option>
-      <option v-for="option in options" :value="option" :key="option">{{ option }}</option>
+      <option v-for="option in options" :value="option._id" :key="option._id">
+        {{ option.name }}
+      </option>
     </select>
     <font-awesome-icon :class="['font_awesome']" icon="fa-solid fa-circle-chevron-down" />
   </div>
@@ -15,8 +17,8 @@ const { name, placeHolder, options, defaultValue } = defineProps(['name', 'place
 const filtersStore = useFiltersStore()
 
 const selectedValue = ref("")
-watch(() => defaultValue, (newSession) => {
-  selectedValue.value = newSession || ""
+watch(() => defaultValue, (newValue) => {
+  selectedValue.value = newValue || ""
 }, { immediate: true })
 
 watch(selectedValue, (newValue) => {

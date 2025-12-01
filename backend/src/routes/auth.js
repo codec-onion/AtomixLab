@@ -19,7 +19,7 @@ const loginValidation = [
 ]
 
 // Routes publiques
-router.post('/register', registerValidation, register)
+router.post('/register', registerValidation, protect, register)
 router.post('/login', loginValidation, login)
 
 // Routes protégées

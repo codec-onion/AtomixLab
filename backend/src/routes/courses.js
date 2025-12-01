@@ -15,12 +15,25 @@ const router = express.Router()
 // Validation rules pour la création/modification de cours
 const courseValidation = [
   body('title').trim().notEmpty().withMessage('Le titre est requis'),
-  body('thematique').trim().notEmpty().withMessage('La thématique est requise'),
-  body('niveauScolaire').trim().notEmpty().withMessage('Le niveau scolaire est requis'),
-  body('session').trim().notEmpty().withMessage('La session est requise'),
+  body('thematique')
+    .notEmpty()
+    .withMessage('La thématique est requise')
+    .isMongoId()
+    .withMessage('La thématique doit être un ID valide'),
+  body('niveauScolaire')
+    .notEmpty()
+    .withMessage('Le niveau scolaire est requis')
+    .isMongoId()
+    .withMessage('Le niveau scolaire doit être un ID valide'),
+  body('session')
+    .notEmpty()
+    .withMessage('La session est requise')
+    .isMongoId()
+    .withMessage('La session doit être un ID valide'),
   body('type')
     .isIn(['Chimie', 'Physique', 'Rappel de connaissance'])
     .withMessage('Le type doit être "Chimie" ou "Physique" ou "Rappel de connaissance"'),
+  body('urlDownload').trim().notEmpty().withMessage('L\'url de téléchargement est requise'),
 ]
 
 // Route pour les sessions (doit être avant /:id pour éviter les conflits)

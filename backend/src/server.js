@@ -5,6 +5,9 @@ import morgan from 'morgan'
 import connectDB from './config/db.js'
 import authRoutes from './routes/auth.js'
 import courseRoutes from './routes/courses.js'
+import sessionRoutes from './routes/sessions.js'
+import niveauScolaireRoutes from './routes/niveauxScolaires.js'
+import thematiqueRoutes from './routes/thematiques.js'
 import { notFound, errorHandler } from './middlewares/errorHandler.js'
 import mongoose from 'mongoose'
 
@@ -76,45 +79,6 @@ app.get('/health', async (req, res) => {
   }
 })
 
-// Keep-alive endpoint (optimized for cron jobs)
-app.get('/keep-alive', async (req, res) => {
-  const timestamp = new Date().toISOString()
-  const userAgent = req.get('User-Agent') || 'N/A'
-  const ip = req.headers['x-forwarded-for'] ||
-             req.headers['x-real-ip'] ||
-             req.socket.remoteAddress ||
-             'N/A'
-  const uptime = process.uptime()
-  const isColdStart = uptime < 60 // Moins de 60 secondes = probable cold start
-
-  try {
-    // Ping rapide de la DB pour maintenir la connexion active
-    await mongoose.connection.db.admin().ping()
-
-    // Log détaillé pour diagnostiquer les problèmes de cron
-    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
-    console.log(`🔄 KEEP-ALIVE PING REÇU`)
-    console.log(`⏰ Timestamp: ${timestamp}`)
-    console.log(`🌐 IP Source: ${ip}`)
-    console.log(`🤖 User-Agent: ${userAgent}`)
-    console.log(`⚡ Uptime: ${Math.floor(uptime)}s ${isColdStart ? '(COLD START)' : '(running)'}`)
-    console.log(`✅ MongoDB: Connected`)
-    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
-
-    res.status(200).json({ alive: true })
-  } catch (error) {
-    console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
-    console.error(`❌ KEEP-ALIVE FAILED`)
-    console.error(`⏰ Timestamp: ${timestamp}`)
-    console.error(`🌐 IP Source: ${ip}`)
-    console.error(`🤖 User-Agent: ${userAgent}`)
-    console.error(`💥 Error: ${error.message}`)
-    console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
-
-    res.status(503).json({ alive: false, error: error.message })
-  }
-})
-
 // Route de test
 app.get('/', (req, res) => {
   res.json({
@@ -134,6 +98,27 @@ app.get('/', (req, res) => {
         delete: 'DELETE /api/courses/:id (admin)',
         sessions: 'GET /api/courses/sessions/list',
       },
+      sessions: {
+        getAll: 'GET /api/sessions',
+        getOne: 'GET /api/sessions/:id',
+        create: 'POST /api/sessions (admin)',
+        update: 'PUT /api/sessions/:id (admin)',
+        delete: 'DELETE /api/sessions/:id (admin)',
+      },
+      niveauxScolaires: {
+        getAll: 'GET /api/niveaux-scolaires',
+        getOne: 'GET /api/niveaux-scolaires/:id',
+        create: 'POST /api/niveaux-scolaires (admin)',
+        update: 'PUT /api/niveaux-scolaires/:id (admin)',
+        delete: 'DELETE /api/niveaux-scolaires/:id (admin)',
+      },
+      thematiques: {
+        getAll: 'GET /api/thematiques',
+        getOne: 'GET /api/thematiques/:id',
+        create: 'POST /api/thematiques (admin)',
+        update: 'PUT /api/thematiques/:id (admin)',
+        delete: 'DELETE /api/thematiques/:id (admin)',
+      },
     },
   })
 })
@@ -141,6 +126,9 @@ app.get('/', (req, res) => {
 // Routes API
 app.use('/api/auth', authRoutes)
 app.use('/api/courses', courseRoutes)
+app.use('/api/sessions', sessionRoutes)
+app.use('/api/niveaux-scolaires', niveauScolaireRoutes)
+app.use('/api/thematiques', thematiqueRoutes)
 
 // Middleware de gestion des erreurs (doit être après les routes)
 app.use(notFound)

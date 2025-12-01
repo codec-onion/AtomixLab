@@ -16,15 +16,16 @@ export const getCourses = async (req, res) => {
     if (thematique) filter.thematique = thematique
     if (type) filter.type = type
 
-    // Recherche textuelle
+    // Recherche textuelle sur le titre uniquement
     if (search) {
-      filter.$or = [
-        { title: { $regex: search, $options: 'i' } },
-        { thematique: { $regex: search, $options: 'i' } },
-      ]
+      filter.title = { $regex: search, $options: 'i' }
     }
 
-    const courses = await Course.find(filter).sort({ createdAt: -1 })
+    const courses = await Course.find(filter)
+      .populate('session', 'name description')
+      .populate('niveauScolaire', 'name description')
+      .populate('thematique', 'name description')
+      .sort({ createdAt: -1 })
 
     res.status(200).json({
       success: true,
@@ -47,6 +48,9 @@ export const getCourses = async (req, res) => {
 export const getCourse = async (req, res) => {
   try {
     const course = await Course.findById(req.params.id)
+      .populate('session', 'name description')
+      .populate('niveauScolaire', 'name description')
+      .populate('thematique', 'name description')
 
     if (!course) {
       return res.status(404).json({
@@ -85,17 +89,7 @@ export const createCourse = async (req, res) => {
 
     const courseData = {
       ...req.body,
-      updateCours: [
-        {
-          type: 'creation',
-          userId: req.user._id,
-          whatUpdated: 'title',
-          update: {
-            from: null,
-            to: req.body.title,
-          },
-        },
-      ],
+      updateCours: [],
     }
 
     const course = await Course.create(courseData)
@@ -160,6 +154,9 @@ export const updateCourse = async (req, res) => {
         runValidators: true,
       }
     )
+      .populate('session', 'name description')
+      .populate('niveauScolaire', 'name description')
+      .populate('thematique', 'name description')
 
     res.status(200).json({
       success: true,

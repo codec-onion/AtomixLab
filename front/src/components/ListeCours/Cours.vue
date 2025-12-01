@@ -1,6 +1,6 @@
 <template>
   <article>
-    <a href="#">
+    <a href="" @click.prevent>
       <div class="header">
         <div class="session_niveau">
           <p class="niveau_scolaire">{{ infosCours.niveauScolaire }}</p>
@@ -22,7 +22,7 @@
         </div>
       </div>
 
-      <p class="theme">Thème: {{ infosCours.thematique }}</p>
+      <p class="theme"><u>Thème:</u> {{ infosCours.thematique }}</p>
       <h2 class="title">{{ infosCours.title }}</h2>
       <p class="infos">Cliquez sur la carte pour télécharger</p>
       <font-awesome-icon class="icon" icon="fa-solid fa-graduation-cap" />

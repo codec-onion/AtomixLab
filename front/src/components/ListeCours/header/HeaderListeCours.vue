@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useDonnesStore } from '@/stores/donnes'
 import Select from './Select.vue'
@@ -16,35 +16,27 @@ import Select from './Select.vue'
 const defaultValueSession = ref(null)
 
 const donneesStore = useDonnesStore()
-const { cours } = storeToRefs(donneesStore)
+const { sessions, niveauxScolaires, thematiques, defaultSessionId } = storeToRefs(donneesStore)
 
+// Options triées pour les selects
 const optionsSession = computed(() => {
-  let sessions = new Set([])
-  cours.value.forEach((el) => sessions.add(el.session))
-  sessions = [...sessions].sort()
-  const now = new Date().getTime()
-  for (let session of sessions) {
-    const sessionsArray = session.split("-")
-    const startSession = new Date(sessionsArray[0], 6).getTime()
-    const endSession = new Date(sessionsArray[1], 5, 30).getTime()
-    if (now >= startSession && now <= endSession) {
-      defaultValueSession.value = session
-      break
-    }
-  }
-  if (!defaultValueSession.value) defaultValueSession.value = sessions[sessions.length - 1]
-  return sessions
+  return [...sessions.value].sort((a, b) => b.name.localeCompare(a.name))
 })
+
 const optionsNiveauScolaire = computed(() => {
-  const niveauxScolaire = new Set([])
-  cours.value.forEach((el) => niveauxScolaire.add(el.niveauScolaire))
-  return [...niveauxScolaire]
+  return [...niveauxScolaires.value].sort((a, b) => a.name.localeCompare(b.name))
 })
+
 const optionsTheme = computed(() => {
-  const thematiques = new Set([])
-  cours.value.forEach((el) => thematiques.add(el.thematique))
-  return [...thematiques]
+  return [...thematiques.value].sort((a, b) => a.name.localeCompare(b.name))
 })
+
+// Utiliser le defaultSessionId du store (calculé automatiquement)
+watch(defaultSessionId, (newDefaultId) => {
+  if (newDefaultId && !defaultValueSession.value) {
+    defaultValueSession.value = newDefaultId
+  }
+}, { immediate: true })
 </script>
 
 <style scoped>

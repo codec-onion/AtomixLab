@@ -2,13 +2,21 @@
   <header class="flexbox_usual">
     <span id="header_title">AtomixLab</span>
     <span id="header_icons">
+      <!-- <a href="" @click="linkEventListener">Test</a> -->
       <font-awesome-icon icon="fa-solid fa-explosion" />
       <font-awesome-icon icon="flask-vial" />
     </span>
   </header>
 </template>
 
-<script setup></script>
+<script setup>
+import { onMounted, onBeforeUnmount } from 'vue'
+
+// const linkEventListener = (e) => {
+//   e.preventDefault()
+
+// }
+</script>
 
 <style scoped>
 header {

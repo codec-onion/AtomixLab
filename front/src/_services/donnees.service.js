@@ -1,16 +1,5 @@
 import Axios from './axios'
 
-// Récupérer toutes les sessions disponibles
-export const getSessions = async () => {
-  try {
-    const res = await Axios.get('/courses/sessions/list')
-    return res.data.data
-  } catch (error) {
-    console.error('Erreur lors de la récupération des sessions:', error)
-    throw error
-  }
-}
-
 // Récupérer tous les cours (avec filtres optionnels)
 export const getCours = async (filters = {}) => {
   try {
