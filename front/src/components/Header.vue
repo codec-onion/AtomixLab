@@ -10,12 +10,6 @@
 </template>
 
 <script setup>
-import { onMounted, onBeforeUnmount } from 'vue'
-
-// const linkEventListener = (e) => {
-//   e.preventDefault()
-
-// }
 </script>
 
 <style scoped>

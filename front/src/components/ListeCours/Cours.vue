@@ -1,6 +1,6 @@
 <template>
   <article>
-    <a href="" @click.prevent>
+    <a :href="infosCours.url" @click.prevent>
       <div class="header">
         <div class="session_niveau">
           <p class="niveau_scolaire">{{ infosCours.niveauScolaire }}</p>

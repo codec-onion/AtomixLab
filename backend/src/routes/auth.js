@@ -1,7 +1,7 @@
 import express from 'express'
 import { body } from 'express-validator'
 import { register, login, getMe } from '../controllers/authController.js'
-import { protect } from '../middlewares/authMiddleware.js'
+import { protect, restrictTo } from '../middlewares/authMiddleware.js'
 
 const router = express.Router()
 
@@ -19,7 +19,7 @@ const loginValidation = [
 ]
 
 // Routes publiques
-router.post('/register', registerValidation, protect, register)
+router.post('/register', registerValidation, protect, restrictTo("admin"), register)
 router.post('/login', loginValidation, login)
 
 // Routes protégées

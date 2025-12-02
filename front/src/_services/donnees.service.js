@@ -1,12 +1,15 @@
 import Axios from './axios'
 
 // Récupérer tous les cours (avec filtres optionnels)
+// Note: niveauScolaire et thématique sont filtrés côté client
 export const getCours = async (filters = {}) => {
   try {
     const params = new URLSearchParams()
+
+    // UNIQUEMENT envoyer le filtre session au backend
     if (filters.session) params.append('session', filters.session)
-    if (filters.niveauScolaire) params.append('niveauScolaire', filters.niveauScolaire)
-    if (filters.thematique) params.append('thematique', filters.thematique)
+
+    // Conserver search et type pour usage futur
     if (filters.type) params.append('type', filters.type)
     if (filters.search) params.append('search', filters.search)
 

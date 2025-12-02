@@ -19,7 +19,7 @@ const donneesStore = useDonnesStore()
 const { cours } = storeToRefs(donneesStore)
 
 const filtersStore = useFiltersStore()
-const { sessionFilter, levelFilter, themeFilter } = storeToRefs(filtersStore)
+const { sessionFilter } = storeToRefs(filtersStore) // UNIQUEMENT surveiller session
 
 /**
  * Extrait les informations d'un cours pour l'affichage
@@ -38,22 +38,18 @@ const getInfosCours = (cours) => {
 }
 
 /**
- * Recharge les cours avec les filtres actuels
+ * Recharge les cours pour la session actuelle
+ * Niveau et thème sont filtrés côté client via computed property
  */
-const loadCoursWithFilters = async () => {
-  const filters = {}
-
-  if (sessionFilter.value) filters.session = sessionFilter.value
-  if (levelFilter.value) filters.niveauScolaire = levelFilter.value
-  if (themeFilter.value) filters.thematique = themeFilter.value
-
-  await donneesStore.loadCours(filters)
+const loadCoursForSession = async () => {
+  await donneesStore.loadCours(sessionFilter.value)
 }
 
-// Watcher sur les filtres pour recharger les cours depuis le serveur
+// Watcher sur sessionFilter uniquement pour recharger depuis le serveur
+// Niveau et thème sont gérés par la propriété calculée dans le store
 // Ce watcher se déclenche automatiquement quand la session par défaut est appliquée
-watch([sessionFilter, levelFilter, themeFilter], () => {
-  loadCoursWithFilters()
+watch(sessionFilter, () => {
+  loadCoursForSession()
 })
 
 onMounted(async () => {

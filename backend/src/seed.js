@@ -96,7 +96,6 @@ const seedData = async () => {
       description: course.description || '',
       creationDate: course.creationDate,
       updateCours: course.updateCours.map((update) => ({
-        type: update.type,
         userId: admin._id, // Utiliser l'ID de l'admin créé
         whatUpdated: update.whatUpdated,
         update: update.update,

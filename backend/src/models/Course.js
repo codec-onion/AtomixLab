@@ -2,11 +2,6 @@ import mongoose from 'mongoose'
 
 const updateHistorySchema = new mongoose.Schema(
   {
-    type: {
-      type: String,
-      enum: ['creation', 'modification', 'ajout', 'suppression'],
-      required: true,
-    },
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
