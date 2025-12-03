@@ -13,9 +13,26 @@ import {
   faCircleChevronDown,
   faCircleChevronUp,
   faGraduationCap,
-  faBook
+  faBook,
+  faXmark,
+  faEye,
+  faEyeSlash,
+  faCircleExclamation,
+  faSpinner
 } from '@fortawesome/free-solid-svg-icons'
-library.add(faFlaskVial, faExplosion, faCircleChevronDown, faCircleChevronUp, faGraduationCap, faBook)
+library.add(
+  faFlaskVial,
+  faExplosion,
+  faCircleChevronDown,
+  faCircleChevronUp,
+  faGraduationCap,
+  faBook,
+  faXmark,
+  faEye,
+  faEyeSlash,
+  faCircleExclamation,
+  faSpinner
+)
 
 /* Vue select pour les listes déroulantes */
 import VueSelect from "vue-select"

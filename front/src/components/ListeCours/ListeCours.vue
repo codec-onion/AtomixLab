@@ -2,7 +2,8 @@
   <section class="margin_section">
     <HeaderListeCours />
     <div class="cours">
-      <Cours v-for="c in cours" :key="c._id" :infosCours="getInfosCours(c)"/>
+      <CoursPlus v-if="isAuthenticated" />
+      <Cours v-for="c in cours" :key="c._id" :infosCours="getInfosCours(c)" />
     </div>
   </section>
 </template>
@@ -12,8 +13,13 @@ import { ref, onMounted, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useDonnesStore } from '@/stores/donnes'
 import { useFiltersStore } from '@/stores/filters'
+import { useAuthStore } from '@/stores/auth'
 import HeaderListeCours from './header/HeaderListeCours.vue'
 import Cours from './Cours.vue'
+import CoursPlus from './CoursPlus.vue'
+
+const authStore = useAuthStore()
+const { isAuthenticated } = storeToRefs(authStore)
 
 const donneesStore = useDonnesStore()
 const { cours } = storeToRefs(donneesStore)

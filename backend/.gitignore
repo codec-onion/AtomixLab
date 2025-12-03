@@ -22,3 +22,6 @@ Thumbs.db
 # Build
 dist/
 build/
+
+# Seed script (contains sensitive data)
+src/seed.js
