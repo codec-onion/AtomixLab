@@ -94,9 +94,15 @@ export const createCourse = async (req, res) => {
 
     const course = await Course.create(courseData)
 
+    // Populate les références pour retourner les objets complets
+    const populatedCourse = await Course.findById(course._id)
+      .populate('session', 'name description')
+      .populate('niveauScolaire', 'name description')
+      .populate('thematique', 'name description')
+
     res.status(201).json({
       success: true,
-      data: course,
+      data: populatedCourse,
     })
   } catch (error) {
     console.error('Erreur lors de la création du cours:', error)

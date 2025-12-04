@@ -1,6 +1,16 @@
 <template>
   <article>
     <a :href="infosCours.url" @click.prevent>
+      <!-- Bouton modifier (admin uniquement) -->
+      <button
+        v-if="authStore.isAdmin"
+        @click.prevent="handleEdit"
+        class="edit-button"
+        title="Modifier ce cours"
+      >
+        <font-awesome-icon icon="fa-solid fa-pen-to-square" />
+      </button>
+
       <div class="header">
         <div class="session_niveau">
           <p class="niveau_scolaire">{{ infosCours.niveauScolaire }}</p>
@@ -31,8 +41,16 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
-const { infosCours } = defineProps(['infosCours'])
+import { useAuthStore } from '@/stores/auth'
+
+const props = defineProps(['infosCours'])
+const emit = defineEmits(['openEditModal'])
+
+const authStore = useAuthStore()
+
+const handleEdit = () => {
+  emit('openEditModal', props.infosCours.id)
+}
 </script>
 
 <style scoped>
@@ -106,5 +124,35 @@ h3 {
 h2 {
   font-size: 36px;
   font-weight: bold;
+}
+
+/* Bouton modifier */
+.edit-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--color-secondary);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  opacity: 0;
+}
+
+a:hover .edit-button {
+  opacity: 1;
+}
+
+.edit-button:hover {
+  background-color: var(--color-icons);
+  transform: scale(1.1);
 }
 </style>

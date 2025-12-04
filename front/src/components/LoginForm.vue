@@ -3,16 +3,8 @@
     <!-- Email field -->
     <div class="form-group">
       <label for="email">Email</label>
-      <input
-        id="email"
-        v-model="formData.email"
-        type="email"
-        placeholder="votre@email.com"
-        required
-        autocomplete="email"
-        :disabled="isLoading"
-        @blur="validateEmail"
-      />
+      <input id="email" v-model="formData.email" type="email" placeholder="votre@email.com" required
+        autocomplete="email" :disabled="isLoading" @blur="validateEmail" />
       <span v-if="errors.email" class="error-message">{{ errors.email }}</span>
     </div>
 
@@ -20,23 +12,10 @@
     <div class="form-group">
       <label for="password">Mot de passe</label>
       <div class="password-wrapper">
-        <input
-          id="password"
-          v-model="formData.password"
-          :type="showPassword ? 'text' : 'password'"
-          placeholder="••••••••"
-          required
-          autocomplete="current-password"
-          :disabled="isLoading"
-          minlength="6"
-        />
-        <button
-          type="button"
-          class="toggle-password"
-          @click="showPassword = !showPassword"
-          :disabled="isLoading"
-          aria-label="Afficher/masquer le mot de passe"
-        >
+        <input id="password" v-model="formData.password" :type="showPassword ? 'text' : 'password'"
+          placeholder="••••••••" required autocomplete="current-password" :disabled="isLoading" minlength="6" />
+        <button type="button" class="toggle-password" @click="showPassword = !showPassword" :disabled="isLoading"
+          aria-label="Afficher/masquer le mot de passe">
           <font-awesome-icon :icon="showPassword ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye'" />
         </button>
       </div>
@@ -50,11 +29,7 @@
     </div>
 
     <!-- Submit button -->
-    <button
-      type="submit"
-      class="submit-button"
-      :disabled="isLoading || !isFormValid"
-    >
+    <button type="submit" class="submit-button" :disabled="isLoading || !isFormValid">
       <span v-if="!isLoading">Se connecter</span>
       <span v-else class="loading-spinner">
         <font-awesome-icon icon="fa-solid fa-spinner" spin />
@@ -102,9 +77,9 @@ const validateEmail = () => {
 // Form validation
 const isFormValid = computed(() => {
   return formData.email.length > 0 &&
-         formData.password.length >= 6 &&
-         !errors.email &&
-         !errors.password
+    formData.password.length >= 6 &&
+    !errors.email &&
+    !errors.password
 })
 
 // Submit handler
@@ -120,7 +95,7 @@ const handleSubmit = async () => {
 
   // Validate password length
   if (formData.password.length < 6) {
-    errors.password = 'Le mot de passe doit contenir au moins 6 caractères'
+    errors.password = 'Le mot de passe doit contenir au moins 8 caractères'
     return
   }
 

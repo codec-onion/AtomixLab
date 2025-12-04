@@ -1,7 +1,7 @@
 <template>
   <article>
-    <a href="" @click.prevent>
-      <p>Ajouer un cours</p>
+    <a href="#" @click.prevent="handleClick">
+      <p>Ajouter un cours</p>
       <p>+</p>
       <font-awesome-icon class="icon" icon="fa-solid fa-graduation-cap" />
     </a>
@@ -9,12 +9,16 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
-const { infosCours } = defineProps(['infosCours'])
+const emit = defineEmits(['openCreateModal'])
+
+const handleClick = () => {
+  emit('openCreateModal')
+}
 </script>
 
 <style scoped>
 a {
+  box-sizing: border-box;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -49,7 +53,7 @@ a:hover {
 }
 p {
   z-index: 1;
-  font-size: 80px;
+  font-size: 50px;
   text-align: center;
 }
 

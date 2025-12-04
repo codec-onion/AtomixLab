@@ -28,3 +28,18 @@ export const getNiveauScolaireById = async (id) => {
     throw error
   }
 }
+
+/**
+ * Crée un nouveau niveau scolaire (admin seulement)
+ * @param {Object} data - {name: string, description?: string}
+ * @returns {Promise<Object>} Niveau scolaire créé avec {_id, name, description}
+ */
+export const createNiveauScolaire = async (data) => {
+  try {
+    const res = await Axios.post('/niveaux-scolaires', data)
+    return res.data.data
+  } catch (error) {
+    console.error('Erreur lors de la création du niveau scolaire:', error)
+    throw error
+  }
+}

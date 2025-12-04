@@ -2,14 +2,36 @@
   <section class="margin_section">
     <HeaderListeCours />
     <div class="cours">
-      <CoursPlus v-if="isAuthenticated" />
-      <Cours v-for="c in cours" :key="c._id" :infosCours="getInfosCours(c)" />
+      <CoursPlus
+        v-if="isAdmin"
+        @openCreateModal="openCreateModal"
+      />
+      <Cours
+        v-for="c in cours"
+        :key="c._id"
+        :infosCours="getInfosCours(c)"
+        @openEditModal="openEditModal"
+      />
     </div>
+
+    <!-- Modal du formulaire -->
+    <Modal
+      :isOpen="isModalOpen"
+      :title="modalTitle"
+      @close="closeModal"
+      :closeOnBackdrop="false"
+    >
+      <CreateOrUpdateCourseForm
+        :courseId="editCourseId"
+        @success="handleFormSuccess"
+        @cancel="closeModal"
+      />
+    </Modal>
   </section>
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useDonnesStore } from '@/stores/donnes'
 import { useFiltersStore } from '@/stores/filters'
@@ -17,9 +39,11 @@ import { useAuthStore } from '@/stores/auth'
 import HeaderListeCours from './header/HeaderListeCours.vue'
 import Cours from './Cours.vue'
 import CoursPlus from './CoursPlus.vue'
+import Modal from '@/components/Modal.vue'
+import CreateOrUpdateCourseForm from '@/components/CreateOrUpdateCourseForm.vue'
 
 const authStore = useAuthStore()
-const { isAuthenticated } = storeToRefs(authStore)
+const { isAdmin } = storeToRefs(authStore)
 
 const donneesStore = useDonnesStore()
 const { cours } = storeToRefs(donneesStore)
@@ -27,12 +51,52 @@ const { cours } = storeToRefs(donneesStore)
 const filtersStore = useFiltersStore()
 const { sessionFilter } = storeToRefs(filtersStore) // UNIQUEMENT surveiller session
 
+// Modal state
+const isModalOpen = ref(false)
+const editCourseId = ref(null)
+
+const modalTitle = computed(() => {
+  return editCourseId.value ? 'Modifier le cours' : 'Créer un nouveau cours'
+})
+
+/**
+ * Open modal for creating new course
+ */
+const openCreateModal = () => {
+  editCourseId.value = null
+  isModalOpen.value = true
+}
+
+/**
+ * Open modal for editing existing course
+ */
+const openEditModal = (courseId) => {
+  editCourseId.value = courseId
+  isModalOpen.value = true
+}
+
+/**
+ * Close modal
+ */
+const closeModal = () => {
+  isModalOpen.value = false
+  editCourseId.value = null
+}
+
+/**
+ * Handle form success (create or update)
+ */
+const handleFormSuccess = () => {
+  closeModal()
+}
+
 /**
  * Extrait les informations d'un cours pour l'affichage
  * Gère le format populate (session: {_id, name})
  */
 const getInfosCours = (cours) => {
   const infosCours = {
+    id: cours._id, // IMPORTANT: Include ID for edit functionality
     session: cours.session?.name || cours.session,
     niveauScolaire: cours.niveauScolaire?.name || cours.niveauScolaire,
     thematique: cours.thematique?.name || cours.thematique,

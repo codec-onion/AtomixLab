@@ -178,6 +178,44 @@ export const useDonnesStore = defineStore('donnees', () => {
     await loadCours()
   }
 
+  /**
+   * Ajoute une nouvelle session au store
+   */
+  function addSession(session) {
+    sessions.value.push(session)
+  }
+
+  /**
+   * Ajoute un nouveau niveau scolaire au store
+   */
+  function addNiveauScolaire(niveau) {
+    niveauxScolaires.value.push(niveau)
+  }
+
+  /**
+   * Ajoute une nouvelle thématique au store
+   */
+  function addThematique(thematique) {
+    thematiques.value.push(thematique)
+  }
+
+  /**
+   * Ajoute un nouveau cours au store
+   */
+  function addCours(cours) {
+    rawCours.value.unshift(cours) // Ajouter en début de liste
+  }
+
+  /**
+   * Met à jour un cours existant dans le store
+   */
+  function updateCoursInStore(id, updatedCours) {
+    const index = rawCours.value.findIndex(c => c._id === id)
+    if (index !== -1) {
+      rawCours.value[index] = updatedCours
+    }
+  }
+
   return {
     // États cours
     rawCours,
@@ -205,6 +243,11 @@ export const useDonnesStore = defineStore('donnees', () => {
     loadSessions,
     loadNiveauxScolaires,
     loadThematiques,
-    loadAllReferenceData
+    loadAllReferenceData,
+    addSession,
+    addNiveauScolaire,
+    addThematique,
+    addCours,
+    updateCoursInStore
   }
 })
