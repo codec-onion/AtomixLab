@@ -45,3 +45,7 @@ front/.vscode/*
 
 # Vitest
 __screenshots__/
+
+# Claude Code configuration (development only, not for production)
+.claude/
+CLAUDE.md
