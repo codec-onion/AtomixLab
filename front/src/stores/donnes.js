@@ -216,6 +216,11 @@ export const useDonnesStore = defineStore('donnees', () => {
     }
   }
 
+  function deleteCourseInStore (id) {
+    const index = rawCours.value.findIndex(c => c._id === id)
+    rawCours.value.splice(index, 1)
+  }
+
   return {
     // États cours
     rawCours,
@@ -248,6 +253,7 @@ export const useDonnesStore = defineStore('donnees', () => {
     addNiveauScolaire,
     addThematique,
     addCours,
-    updateCoursInStore
+    updateCoursInStore,
+    deleteCourseInStore
   }
 })

@@ -10,6 +10,14 @@
       >
         <font-awesome-icon icon="fa-solid fa-pen-to-square" />
       </button>
+      <button
+        v-if="authStore.isAdmin"
+        @click.prevent="handleDelete"
+        class="delete-button"
+        title="Supprimer ce cours"
+      >
+        <font-awesome-icon icon="fa-solid fa-xmark" />
+      </button>
 
       <div class="header">
         <div class="session_niveau">
@@ -41,15 +49,23 @@
 </template>
 
 <script setup>
+import { deleteCours } from '@/_services/donnees.service'
 import { useAuthStore } from '@/stores/auth'
+import { useDonnesStore } from '@/stores/donnes'
 
 const props = defineProps(['infosCours'])
 const emit = defineEmits(['openEditModal'])
 
 const authStore = useAuthStore()
+const { deleteCourseInStore } = useDonnesStore()
 
 const handleEdit = () => {
   emit('openEditModal', props.infosCours.id)
+}
+
+const handleDelete = async () => {
+  const deletedCourse = await deleteCours(props.infosCours.id)
+  deleteCourseInStore(props.infosCours.id)
 }
 </script>
 
@@ -126,11 +142,11 @@ h2 {
   font-weight: bold;
 }
 
-/* Bouton modifier */
+/* Boutons modifier et supprimer */
 .edit-button {
   position: absolute;
   top: 10px;
-  right: 10px;
+  right: 60px;
   width: 40px;
   height: 40px;
   border: none;
@@ -147,12 +163,36 @@ h2 {
   opacity: 0;
 }
 
-a:hover .edit-button {
+.delete-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  opacity: 0;
+}
+
+a:hover .edit-button,
+a:hover .delete-button {
   opacity: 1;
 }
 
 .edit-button:hover {
   background-color: var(--color-icons);
+  transform: scale(1.1);
+}
+.delete-button:hover {
   transform: scale(1.1);
 }
 </style>
