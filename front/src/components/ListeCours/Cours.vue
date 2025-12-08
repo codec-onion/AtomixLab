@@ -1,6 +1,6 @@
 <template>
   <article>
-    <a :href="infosCours.url" @click.prevent>
+    <a :href="infosCours.url" target="_blank">
       <!-- Bouton modifier (admin uniquement) -->
       <button
         v-if="authStore.isAdmin"
