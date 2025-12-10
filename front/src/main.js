@@ -20,7 +20,9 @@ import {
   faCircleExclamation,
   faSpinner,
   faCheck,
-  faPenToSquare
+  faPenToSquare,
+  faPen,
+  faTrash
 } from '@fortawesome/free-solid-svg-icons'
 library.add(
   faFlaskVial,
@@ -35,7 +37,9 @@ library.add(
   faCircleExclamation,
   faSpinner,
   faCheck,
-  faPenToSquare
+  faPenToSquare,
+  faPen,
+  faTrash
 )
 
 /* Vue select pour les listes déroulantes */

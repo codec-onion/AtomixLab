@@ -43,3 +43,34 @@ export const createThematique = async (data) => {
     throw error
   }
 }
+
+/**
+ * Met à jour une thématique (admin seulement)
+ * @param {string} id - ID de la thématique
+ * @param {Object} data - {name: string, description?: string}
+ * @returns {Promise<Object>} Thématique mise à jour avec {_id, name, description}
+ */
+export const updateThematique = async (id, data) => {
+  try {
+    const res = await Axios.put(`/thematiques/${id}`, data)
+    return res.data.data
+  } catch (error) {
+    console.error('Erreur lors de la mise à jour de la thématique:', error)
+    throw error
+  }
+}
+
+/**
+ * Supprime une thématique (admin seulement)
+ * @param {string} id - ID de la thématique
+ * @returns {Promise<Object>} Réponse de confirmation {success, message}
+ */
+export const deleteThematique = async (id) => {
+  try {
+    const res = await Axios.delete(`/thematiques/${id}`)
+    return res.data
+  } catch (error) {
+    console.error('Erreur lors de la suppression de la thématique:', error)
+    throw error
+  }
+}

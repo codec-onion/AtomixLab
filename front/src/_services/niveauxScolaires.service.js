@@ -43,3 +43,34 @@ export const createNiveauScolaire = async (data) => {
     throw error
   }
 }
+
+/**
+ * Met à jour un niveau scolaire (admin seulement)
+ * @param {string} id - ID du niveau scolaire
+ * @param {Object} data - {name: string, description?: string}
+ * @returns {Promise<Object>} Niveau scolaire mis à jour avec {_id, name, description}
+ */
+export const updateNiveauScolaire = async (id, data) => {
+  try {
+    const res = await Axios.put(`/niveaux-scolaires/${id}`, data)
+    return res.data.data
+  } catch (error) {
+    console.error('Erreur lors de la mise à jour du niveau scolaire:', error)
+    throw error
+  }
+}
+
+/**
+ * Supprime un niveau scolaire (admin seulement)
+ * @param {string} id - ID du niveau scolaire
+ * @returns {Promise<Object>} Réponse de confirmation {success, message}
+ */
+export const deleteNiveauScolaire = async (id) => {
+  try {
+    const res = await Axios.delete(`/niveaux-scolaires/${id}`)
+    return res.data
+  } catch (error) {
+    console.error('Erreur lors de la suppression du niveau scolaire:', error)
+    throw error
+  }
+}

@@ -221,6 +221,66 @@ export const useDonnesStore = defineStore('donnees', () => {
     rawCours.value.splice(index, 1)
   }
 
+  /**
+   * Met à jour une session existante dans le store
+   */
+  function updateSession(id, updatedSession) {
+    const index = sessions.value.findIndex(s => s._id === id)
+    if (index !== -1) {
+      sessions.value[index] = updatedSession
+    }
+  }
+
+  /**
+   * Met à jour un niveau scolaire existant dans le store
+   */
+  function updateNiveauScolaire(id, updatedNiveau) {
+    const index = niveauxScolaires.value.findIndex(n => n._id === id)
+    if (index !== -1) {
+      niveauxScolaires.value[index] = updatedNiveau
+    }
+  }
+
+  /**
+   * Met à jour une thématique existante dans le store
+   */
+  function updateThematique(id, updatedThematique) {
+    const index = thematiques.value.findIndex(t => t._id === id)
+    if (index !== -1) {
+      thematiques.value[index] = updatedThematique
+    }
+  }
+
+  /**
+   * Supprime une session du store
+   */
+  function deleteSession(id) {
+    const index = sessions.value.findIndex(s => s._id === id)
+    if (index !== -1) {
+      sessions.value.splice(index, 1)
+    }
+  }
+
+  /**
+   * Supprime un niveau scolaire du store
+   */
+  function deleteNiveauScolaire(id) {
+    const index = niveauxScolaires.value.findIndex(n => n._id === id)
+    if (index !== -1) {
+      niveauxScolaires.value.splice(index, 1)
+    }
+  }
+
+  /**
+   * Supprime une thématique du store
+   */
+  function deleteThematique(id) {
+    const index = thematiques.value.findIndex(t => t._id === id)
+    if (index !== -1) {
+      thematiques.value.splice(index, 1)
+    }
+  }
+
   return {
     // États cours
     rawCours,
@@ -254,6 +314,12 @@ export const useDonnesStore = defineStore('donnees', () => {
     addThematique,
     addCours,
     updateCoursInStore,
-    deleteCourseInStore
+    deleteCourseInStore,
+    updateSession,
+    updateNiveauScolaire,
+    updateThematique,
+    deleteSession,
+    deleteNiveauScolaire,
+    deleteThematique
   }
 })

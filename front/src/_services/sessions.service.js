@@ -43,3 +43,34 @@ export const createSession = async (data) => {
     throw error
   }
 }
+
+/**
+ * Met à jour une session (admin seulement)
+ * @param {string} id - ID de la session
+ * @param {Object} data - {name: string, description?: string}
+ * @returns {Promise<Object>} Session mise à jour avec {_id, name, description}
+ */
+export const updateSession = async (id, data) => {
+  try {
+    const res = await Axios.put(`/sessions/${id}`, data)
+    return res.data.data
+  } catch (error) {
+    console.error('Erreur lors de la mise à jour de la session:', error)
+    throw error
+  }
+}
+
+/**
+ * Supprime une session (admin seulement)
+ * @param {string} id - ID de la session
+ * @returns {Promise<Object>} Réponse de confirmation {success, message}
+ */
+export const deleteSession = async (id) => {
+  try {
+    const res = await Axios.delete(`/sessions/${id}`)
+    return res.data
+  } catch (error) {
+    console.error('Erreur lors de la suppression de la session:', error)
+    throw error
+  }
+}

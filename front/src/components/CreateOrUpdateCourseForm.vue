@@ -175,7 +175,7 @@
 import { ref, reactive, computed, onMounted } from 'vue'
 import { useDonnesStore } from '@/stores/donnes'
 import { getCoursByID, createCours, updateCours } from '@/_services/donnees.service'
-import SmartSelect from './ListeCours/header/SmartSelect.vue'
+import SmartSelect from './SmartSelect.vue'
 
 const props = defineProps({
   courseId: {
