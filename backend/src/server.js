@@ -8,6 +8,7 @@ import courseRoutes from './routes/courses.js'
 import sessionRoutes from './routes/sessions.js'
 import niveauScolaireRoutes from './routes/niveauxScolaires.js'
 import thematiqueRoutes from './routes/thematiques.js'
+import reassignmentRoutes from './routes/reassignment.js'
 import { notFound, errorHandler } from './middlewares/errorHandler.js'
 import mongoose from 'mongoose'
 
@@ -129,6 +130,7 @@ app.use('/api/courses', courseRoutes)
 app.use('/api/sessions', sessionRoutes)
 app.use('/api/niveaux-scolaires', niveauScolaireRoutes)
 app.use('/api/thematiques', thematiqueRoutes)
+app.use('/api/reassignment', reassignmentRoutes)
 
 // Middleware de gestion des erreurs (doit être après les routes)
 app.use(notFound)

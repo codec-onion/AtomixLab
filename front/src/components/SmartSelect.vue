@@ -140,16 +140,27 @@
 
     <!-- Message d'erreur -->
     <span v-if="error" class="error-message">{{ error }}</span>
+
+    <!-- Modale de réassignation -->
+    <ReassignmentModal
+      :isOpen="showReassignmentModal"
+      :resourceType="resourceType"
+      :itemToDelete="reassignmentData.itemToDelete"
+      :dependentCourses="reassignmentData.dependentCourses"
+      @success="handleReassignmentSuccess"
+      @close="handleReassignmentClose"
+    />
   </div>
 </template>
 
 <script setup>
 import { ref, watch, nextTick, computed, onMounted, onUnmounted } from 'vue'
-import { useDonnesStore } from '@/stores/donnes'
+import { useFiltersStore } from '@/stores/filters'
 import { useAuthStore } from '@/stores/auth'
 import { createSession, updateSession as updateSessionService, deleteSession as deleteSessionService } from '@/_services/sessions.service'
 import { createNiveauScolaire, updateNiveauScolaire as updateNiveauScolaireService, deleteNiveauScolaire as deleteNiveauScolaireService } from '@/_services/niveauxScolaires.service'
 import { createThematique, updateThematique as updateThematiqueService, deleteThematique as deleteThematiqueService } from '@/_services/thematiques.service'
+import ReassignmentModal from '@/components/ReassignmentModal.vue'
 
 const props = defineProps({
   name: {
@@ -180,7 +191,7 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue'])
 
-const donneesStore = useDonnesStore()
+const filtersStore = useFiltersStore()
 const authStore = useAuthStore()
 
 // Refs
@@ -208,6 +219,13 @@ const isDeleting = ref(false)
 const deletingItemId = ref(null)
 const deletingItemName = ref('')
 const showDeleteConfirm = ref(false)
+
+// État - Modale de réassignation
+const showReassignmentModal = ref(false)
+const reassignmentData = ref({
+  itemToDelete: null,
+  dependentCourses: []
+})
 
 // État - Erreur
 const error = ref('')
@@ -267,15 +285,15 @@ const handleAdd = async () => {
     switch (props.name) {
       case 'session':
         createdItem = await createSession({ name: newItemName.value.trim() })
-        donneesStore.addSession(createdItem)
+        filtersStore.addSession(createdItem)
         break
       case 'niveau-scolaire':
         createdItem = await createNiveauScolaire({ name: newItemName.value.trim() })
-        donneesStore.addNiveauScolaire(createdItem)
+        filtersStore.addNiveauScolaire(createdItem)
         break
       case 'theme':
         createdItem = await createThematique({ name: newItemName.value.trim() })
-        donneesStore.addThematique(createdItem)
+        filtersStore.addThematique(createdItem)
         break
       default:
         throw new Error(`Unknown field type: ${props.name}`)
@@ -340,19 +358,19 @@ const handleUpdate = async () => {
         updatedItem = await updateSessionService(editingItemId.value, {
           name: editingItemName.value.trim()
         })
-        donneesStore.updateSession(editingItemId.value, updatedItem)
+        filtersStore.updateSession(editingItemId.value, updatedItem)
         break
       case 'niveau-scolaire':
         updatedItem = await updateNiveauScolaireService(editingItemId.value, {
           name: editingItemName.value.trim()
         })
-        donneesStore.updateNiveauScolaire(editingItemId.value, updatedItem)
+        filtersStore.updateNiveauScolaire(editingItemId.value, updatedItem)
         break
       case 'theme':
         updatedItem = await updateThematiqueService(editingItemId.value, {
           name: editingItemName.value.trim()
         })
-        donneesStore.updateThematique(editingItemId.value, updatedItem)
+        filtersStore.updateThematique(editingItemId.value, updatedItem)
         break
       default:
         throw new Error(`Unknown field type: ${props.name}`)
@@ -404,18 +422,19 @@ const handleDelete = async () => {
   error.value = ''
 
   try {
+    // Appeler le service de suppression
     switch (props.name) {
       case 'session':
         await deleteSessionService(deletingItemId.value)
-        donneesStore.deleteSession(deletingItemId.value)
+        filtersStore.deleteSession(deletingItemId.value)
         break
       case 'niveau-scolaire':
         await deleteNiveauScolaireService(deletingItemId.value)
-        donneesStore.deleteNiveauScolaire(deletingItemId.value)
+        filtersStore.deleteNiveauScolaire(deletingItemId.value)
         break
       case 'theme':
         await deleteThematiqueService(deletingItemId.value)
-        donneesStore.deleteThematique(deletingItemId.value)
+        filtersStore.deleteThematique(deletingItemId.value)
         break
       default:
         throw new Error(`Unknown field type: ${props.name}`)
@@ -429,8 +448,40 @@ const handleDelete = async () => {
 
     cancelDelete()
   } catch (err) {
-    if (err.response?.data?.message) {
-      error.value = err.response.data.message
+    console.log('❌ Erreur attrapée dans handleDelete:', err)
+    console.log('📊 err.status:', err.status)
+    console.log('📊 err.data:', err.data)
+
+    // Si erreur 409 (conflit = dépendances), ouvrir la modale de réassignation
+    // Note: Axios peut retourner soit err.response.status soit err.status selon le contexte
+    const status = err.response?.status || err.status
+    const errorData = err.response?.data || err.data
+
+    if (status === 409) {
+      console.log('🔄 Erreur 409 détectée, ouverture de la modale de réassignation')
+      const dependenciesData = errorData.data
+
+      reassignmentData.value = {
+        itemToDelete: {
+          _id: deletingItemId.value,
+          name: deletingItemName.value
+        },
+        dependentCourses: dependenciesData.dependentCourses
+      }
+
+      console.log('📦 reassignmentData:', reassignmentData.value)
+      console.log('🚀 Ouverture de la modale, showReassignmentModal:', showReassignmentModal.value, '→ true')
+
+      showReassignmentModal.value = true
+      showDeleteConfirm.value = false
+      isDeleting.value = false
+      return
+    }
+
+    // Autres erreurs
+    const errorMessage = errorData?.message || err.message
+    if (errorMessage) {
+      error.value = errorMessage
     } else {
       error.value = 'Erreur lors de la suppression'
     }
@@ -449,6 +500,53 @@ const cancelDelete = () => {
   deletingItemName.value = ''
   isDeleting.value = false
 }
+
+/**
+ * Handle reassignment success
+ */
+const handleReassignmentSuccess = () => {
+  showReassignmentModal.value = false
+  reassignmentData.value = {
+    itemToDelete: null,
+    dependentCourses: []
+  }
+
+  // Si l'élément supprimé était sélectionné, réinitialiser
+  if (selectedValue.value === deletingItemId.value) {
+    selectedValue.value = ''
+    emit('update:modelValue', '')
+  }
+
+  cancelDelete()
+}
+
+/**
+ * Handle reassignment close
+ */
+const handleReassignmentClose = () => {
+  showReassignmentModal.value = false
+  reassignmentData.value = {
+    itemToDelete: null,
+    dependentCourses: []
+  }
+  cancelDelete()
+}
+
+/**
+ * Computed: Get resourceType for reassignment API
+ */
+const resourceType = computed(() => {
+  switch (props.name) {
+    case 'session':
+      return 'session'
+    case 'niveau-scolaire':
+      return 'niveauScolaire'
+    case 'theme':
+      return 'thematique'
+    default:
+      return props.name
+  }
+})
 
 /**
  * Fermer le dropdown si clic à l'extérieur

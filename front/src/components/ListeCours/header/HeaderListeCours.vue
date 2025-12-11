@@ -10,13 +10,13 @@
 <script setup>
 import { ref, computed, watch } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useDonnesStore } from '@/stores/donnes'
+import { useFiltersStore } from '@/stores/filters'
 import Select from './Select.vue'
 
 const defaultValueSession = ref(null)
 
-const donneesStore = useDonnesStore()
-const { sessions, niveauxScolaires, thematiques, defaultSessionId } = storeToRefs(donneesStore)
+const filtersStore = useFiltersStore()
+const { sessions, niveauxScolaires, thematiques, defaultSessionId } = storeToRefs(filtersStore)
 
 // Options triées pour les selects
 const optionsSession = computed(() => {

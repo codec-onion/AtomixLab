@@ -74,7 +74,7 @@
           name="session"
           placeholder="Sélectionner une session"
           label-singular="la session"
-          :options="donneesStore.sessions"
+          :options="filtersStore.sessions"
           v-model="formData.session"
           :disabled="isSubmitting"
         />
@@ -88,7 +88,7 @@
           name="niveau-scolaire"
           placeholder="Sélectionner un niveau"
           label-singular="le niveau"
-          :options="donneesStore.niveauxScolaires"
+          :options="filtersStore.niveauxScolaires"
           v-model="formData.niveauScolaire"
           :disabled="isSubmitting"
         />
@@ -102,7 +102,7 @@
           name="theme"
           placeholder="Sélectionner une thématique"
           label-singular="la thématique"
-          :options="donneesStore.thematiques"
+          :options="filtersStore.thematiques"
           v-model="formData.thematique"
           :disabled="isSubmitting"
         />
@@ -174,6 +174,7 @@
 <script setup>
 import { ref, reactive, computed, onMounted } from 'vue'
 import { useDonnesStore } from '@/stores/donnes'
+import { useFiltersStore } from '@/stores/filters'
 import { getCoursByID, createCours, updateCours } from '@/_services/donnees.service'
 import SmartSelect from './SmartSelect.vue'
 
@@ -187,6 +188,7 @@ const props = defineProps({
 const emit = defineEmits(['success', 'cancel'])
 
 const donneesStore = useDonnesStore()
+const filtersStore = useFiltersStore()
 
 // Component state
 const isLoadingCourse = ref(false)
@@ -374,7 +376,7 @@ const handleCancel = () => {
 // Lifecycle
 onMounted(async () => {
   // Ensure reference data is loaded
-  await donneesStore.loadAllReferenceData()
+  await filtersStore.loadAllReferenceData()
 
   // Load course data if edit mode
   if (isEditMode.value) {

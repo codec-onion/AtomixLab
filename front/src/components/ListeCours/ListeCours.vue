@@ -128,7 +128,7 @@ onMounted(async () => {
   // 1. defaultSessionId (computed) calcule la session courante
   // 2. HeaderListeCours (watch) applique le filtre
   // 3. Le watcher ci-dessus charge les cours filtrés
-  await donneesStore.loadAllReferenceData()
+  await filtersStore.loadAllReferenceData()
 })
 </script>
 

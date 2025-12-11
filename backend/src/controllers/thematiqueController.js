@@ -160,6 +160,23 @@ export const deleteThematique = async (req, res) => {
       })
     }
 
+    // Vérifier les dépendances avec les cours
+    const Course = (await import('../models/Course.js')).default
+    const dependentCourses = await Course.find({ thematique: req.params.id })
+      .select('_id title type')
+      .lean()
+
+    if (dependentCourses.length > 0) {
+      return res.status(409).json({
+        success: false,
+        message: `Impossible de supprimer cette thématique car ${dependentCourses.length} cours y sont associés`,
+        data: {
+          dependentCourses,
+          count: dependentCourses.length
+        }
+      })
+    }
+
     await thematique.deleteOne()
 
     res.status(200).json({

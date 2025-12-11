@@ -166,6 +166,23 @@ export const deleteNiveauScolaire = async (req, res) => {
       })
     }
 
+    // Vérifier les dépendances avec les cours
+    const Course = (await import('../models/Course.js')).default
+    const dependentCourses = await Course.find({ niveauScolaire: req.params.id })
+      .select('_id title type')
+      .lean()
+
+    if (dependentCourses.length > 0) {
+      return res.status(409).json({
+        success: false,
+        message: `Impossible de supprimer ce niveau scolaire car ${dependentCourses.length} cours y sont associés`,
+        data: {
+          dependentCourses,
+          count: dependentCourses.length
+        }
+      })
+    }
+
     await niveauScolaire.deleteOne()
 
     res.status(200).json({
