@@ -29,7 +29,6 @@ a {
   background-color: var(--color-primary);
   color: var(--color-secondary);
   text-decoration: none;
-  margin-bottom: 30px;
   padding: 20px;
   border-style: dashed;
   border-width: 10px;

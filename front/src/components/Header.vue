@@ -118,6 +118,7 @@ a:hover {
 /* User menu */
 .user-menu {
   display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 15px;
 }

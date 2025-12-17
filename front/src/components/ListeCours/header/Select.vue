@@ -46,6 +46,7 @@ watch(() => options, (newOptions) => {
   position: relative;
   display: inline-block;
   margin-bottom: 20px;
+  max-width: 100%;
 }
 .select:not(:nth-last-child(-n + 1 of .select)) {
   margin-right: 20px;
@@ -53,6 +54,7 @@ watch(() => options, (newOptions) => {
 select {
   height: 40px;
   padding: 0 45px 0 10px;
+  max-width: 100%;
   border-radius: 20px;
   text-align: center;
   font-family: var(--font-family-title3_4_text);

@@ -82,7 +82,6 @@ a {
   background-color: var(--color-primary);
   color: var(--color-secondary);
   text-decoration: none;
-  margin-bottom: 30px;
   padding: 20px;
   border-radius: 20px;
   box-shadow: 10px 10px 10px lightgray;
