@@ -138,4 +138,9 @@ onMounted(async () => {
   flex-wrap: wrap;
   justify-content: space-between;
 }
+/* Éléments fantômes pour maintenir l'alignement sur les lignes incomplètes */
+.cours::after {
+  content: "";
+  width: 350px;
+}
 </style>

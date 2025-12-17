@@ -71,6 +71,7 @@ const handleDelete = async () => {
 
 <style scoped>
 a {
+  box-sizing: border-box;
   position: relative;
   display: flex;
   flex-wrap: wrap;

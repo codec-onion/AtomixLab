@@ -33,7 +33,7 @@ const optionsTheme = computed(() => {
 
 // Utiliser le defaultSessionId du store (calculé automatiquement)
 watch(defaultSessionId, (newDefaultId) => {
-  if (newDefaultId && !defaultValueSession.value) {
+  if (newDefaultId) {
     defaultValueSession.value = newDefaultId
   }
 }, { immediate: true })

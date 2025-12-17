@@ -284,6 +284,10 @@ const handleAdd = async () => {
     // Call appropriate service based on field name
     switch (props.name) {
       case 'session':
+        if(!(/^(19|20)\d{2}-(19|20)\d{2}$/).test(newItemName.value)) {
+          error.value = "Format du nom d'une session: yyyy-yyyy (ex 2025-2026)"
+          return
+        }
         createdItem = await createSession({ name: newItemName.value.trim() })
         filtersStore.addSession(createdItem)
         break

@@ -31,6 +31,14 @@ watch(selectedValue, (newValue) => {
   }
 }, { immediate: true })
 
+// Surveiller les changements d'options pour vérifier si la valeur sélectionnée existe encore
+watch(() => options, (newOptions) => {
+  if (selectedValue.value && !newOptions.find(opt => opt._id === selectedValue.value)) {
+    // La valeur sélectionnée n'existe plus dans les options, réinitialiser
+    selectedValue.value = defaultValue || ""
+  }
+}, { deep: true })
+
 </script>
 
 <style scoped>

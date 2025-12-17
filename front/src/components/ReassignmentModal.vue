@@ -46,7 +46,7 @@
             class="course-item"
           >
             <font-awesome-icon
-              :icon="course.type === 'Chimie' ? 'fa-solid fa-flask' : 'fa-solid fa-atom'"
+              :icon="course.type === 'Chimie' ? 'flask-vial' : 'fa-solid fa-explosion'"
               class="course-icon"
             />
             <span class="course-title">{{ course.title }}</span>
@@ -179,7 +179,7 @@ const handleReassign = async () => {
     }
 
     // Recharger les cours pour avoir les données à jour
-    await donneesStore.loadCours()
+    await donneesStore.loadCours(filtersStore.sessionFilter)
 
     emit('success')
   } catch (err) {
