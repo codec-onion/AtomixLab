@@ -1,8 +1,7 @@
 <template>
   <article>
     <a href="#" @click.prevent="handleClick">
-      <p>Ajouter un cours</p>
-      <p>+</p>
+      <p>Ajout d'un cours ou Gestion sessions, niveaux et thèmes (ajout, modification ou suppression)</p>
       <font-awesome-icon class="icon" icon="fa-solid fa-graduation-cap" />
     </a>
   </article>
@@ -24,7 +23,7 @@ a {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 350px;
+  min-width: 350px;
   height: 350px;
   background-color: var(--color-primary);
   color: var(--color-secondary);
@@ -48,11 +47,11 @@ a:hover {
   height: 100%;
   position: absolute;
   color: var(--color-tertiary);
-  filter: blur(3px);
+  filter: blur(2px);
 }
 p {
   z-index: 1;
-  font-size: 50px;
+  font-size: 30px;
   text-align: center;
 }
 

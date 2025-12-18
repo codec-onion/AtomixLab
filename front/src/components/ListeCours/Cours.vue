@@ -40,9 +40,8 @@
         </div>
       </div>
 
+      <h2 class="title" :title="infosCours.title">{{ infosCours.title }}</h2>
       <p class="theme"><u>Thème:</u> {{ infosCours.thematique }}</p>
-      <h2 class="title">{{ infosCours.title }}</h2>
-      <p class="infos">Cliquez sur la carte pour télécharger</p>
       <font-awesome-icon class="icon" icon="fa-solid fa-graduation-cap" />
     </a>
   </article>
@@ -74,7 +73,7 @@ a {
   flex-direction: column;
   justify-content: space-between;
   min-width: 350px;
-  min-height: 350px;
+  height: 350px;
   background-color: var(--color-primary);
   color: var(--color-secondary);
   text-decoration: none;
@@ -92,10 +91,10 @@ a:hover {
 .icon {
   display: block;
   width: 90%;
-  height: 100%;
+  height: 90%;
   position: absolute;
   color: var(--color-tertiary);
-  filter: blur(3px);
+  filter: blur(2px);
 }
 p,
 .type_icon,
@@ -130,12 +129,25 @@ h3 {
 .infos {
   font-size: var(--font-size-text-secondary-desktop);
 }
-.infos {
-  text-align: center;
-}
 h2 {
   font-size: 36px;
   font-weight: bold;
+}
+.title {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  overflow-wrap: break-word;
+}
+.theme {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  overflow-wrap: break-word;
 }
 
 /* Boutons modifier et supprimer */

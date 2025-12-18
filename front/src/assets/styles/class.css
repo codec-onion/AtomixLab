@@ -23,3 +23,14 @@
 .margin_section {
   margin: 0 50px 0 50px;
 }
+
+@media (max-width: 768px) {
+  .margin_section {
+    margin: 0 20px 0 20px;
+  }
+}
+@media (max-width: 400px) {
+  .margin_section {
+    margin: 0 5px 0 5px;
+  }
+}

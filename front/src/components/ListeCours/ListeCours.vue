@@ -203,12 +203,4 @@ onMounted(async () => {
   gap: 20px;
   margin-bottom: 30px;
 }
-/* Éléments fantômes pour maintenir l'alignement sur les lignes incomplètes */
-/* .cours::after {
-  content: "";
-  width: 350px;
-} */
-.cours > * {
-  /* flex-grow:2; */
-}
 </style>
