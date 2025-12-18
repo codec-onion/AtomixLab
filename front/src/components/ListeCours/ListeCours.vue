@@ -189,12 +189,18 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-.cours {
+/* .cours {
   display: flex;
   width: 100%;
   flex-wrap: wrap;
   justify-content: center;
   gap: 30px;
+  margin-bottom: 30px;
+} */
+.cours {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 20px;
   margin-bottom: 30px;
 }
 /* Éléments fantômes pour maintenir l'alignement sur les lignes incomplètes */

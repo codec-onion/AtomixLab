@@ -73,8 +73,8 @@ a {
   flex-wrap: wrap;
   flex-direction: column;
   justify-content: space-between;
-  width: 350px;
-  height: 350px;
+  min-width: 350px;
+  min-height: 350px;
   background-color: var(--color-primary);
   color: var(--color-secondary);
   text-decoration: none;
