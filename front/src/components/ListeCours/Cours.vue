@@ -49,23 +49,19 @@
 </template>
 
 <script setup>
-import { deleteCours } from '@/_services/donnees.service'
 import { useAuthStore } from '@/stores/auth'
-import { useDonnesStore } from '@/stores/donnes'
 
 const props = defineProps(['infosCours'])
-const emit = defineEmits(['openEditModal'])
+const emit = defineEmits(['openEditModal', 'openDeleteModal'])
 
 const authStore = useAuthStore()
-const { deleteCourseInStore } = useDonnesStore()
 
 const handleEdit = () => {
   emit('openEditModal', props.infosCours.id)
 }
 
-const handleDelete = async () => {
-  const deletedCourse = await deleteCours(props.infosCours.id)
-  deleteCourseInStore(props.infosCours.id)
+const handleDelete = () => {
+  emit('openDeleteModal', props.infosCours)
 }
 </script>
 

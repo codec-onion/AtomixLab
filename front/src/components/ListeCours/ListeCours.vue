@@ -11,6 +11,7 @@
         :key="c._id"
         :infosCours="getInfosCours(c)"
         @openEditModal="openEditModal"
+        @openDeleteModal="openDeleteModal"
       />
     </div>
 
@@ -27,6 +28,21 @@
         @cancel="closeModal"
       />
     </Modal>
+
+    <!-- Modal de confirmation de suppression -->
+    <Modal
+      :isOpen="isModalDeleteOpen"
+      title="Supprimer le cours"
+      @close="closeDeleteModal"
+      :closeOnBackdrop="true"
+    >
+      <DeleteCours
+        v-if="courseToDelete"
+        :courseInfo="courseToDelete"
+        @cancel="closeDeleteModal"
+        @confirm="handleDeleteConfirm"
+      />
+    </Modal>
   </section>
 </template>
 
@@ -36,11 +52,13 @@ import { storeToRefs } from 'pinia'
 import { useDonnesStore } from '@/stores/donnes'
 import { useFiltersStore } from '@/stores/filters'
 import { useAuthStore } from '@/stores/auth'
+import { deleteCours } from '@/_services/donnees.service'
 import HeaderListeCours from './header/HeaderListeCours.vue'
 import Cours from './Cours.vue'
 import CoursPlus from './CoursPlus.vue'
 import Modal from '@/components/Modal.vue'
 import CreateOrUpdateCourseForm from '@/components/CreateOrUpdateCourseForm.vue'
+import DeleteCours from '@/components/DeleteCours.vue'
 
 const authStore = useAuthStore()
 const { isAdmin } = storeToRefs(authStore)
@@ -51,13 +69,17 @@ const { cours } = storeToRefs(donneesStore)
 const filtersStore = useFiltersStore()
 const { sessionFilter } = storeToRefs(filtersStore) // UNIQUEMENT surveiller session
 
-// Modal state
+// Modal state for create/edit
 const isModalOpen = ref(false)
 const editCourseId = ref(null)
 
 const modalTitle = computed(() => {
   return editCourseId.value ? 'Modifier le cours' : 'Créer un nouveau cours'
 })
+
+// Modal state for delete
+const isModalDeleteOpen = ref(false)
+const courseToDelete = ref(null)
 
 /**
  * Open modal for creating new course
@@ -88,6 +110,40 @@ const closeModal = () => {
  */
 const handleFormSuccess = () => {
   closeModal()
+}
+
+/**
+ * Open delete confirmation modal
+ */
+const openDeleteModal = (courseInfo) => {
+  courseToDelete.value = courseInfo
+  isModalDeleteOpen.value = true
+}
+
+/**
+ * Close delete confirmation modal
+ */
+const closeDeleteModal = () => {
+  isModalDeleteOpen.value = false
+  courseToDelete.value = null
+}
+
+/**
+ * Handle course deletion after confirmation
+ */
+const handleDeleteConfirm = async () => {
+  if (!courseToDelete.value) return
+
+  try {
+    // Supprimer côté serveur
+    await deleteCours(courseToDelete.value.id)
+    // Mettre à jour le store local
+    donneesStore.deleteCourseInStore(courseToDelete.value.id)
+    closeDeleteModal()
+  } catch (error) {
+    console.error('Erreur lors de la suppression du cours:', error)
+    // TODO: afficher un message d'erreur à l'utilisateur
+  }
 }
 
 /**
