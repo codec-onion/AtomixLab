@@ -54,16 +54,20 @@ watch(() => options, (newOptions) => {
 select {
   height: 40px;
   padding: 0 45px 0 10px;
-  max-width: 100%;
+  width: 100%;
   border-radius: 20px;
   text-align: center;
   font-family: var(--font-family-title3_4_text);
   font-size: var(--font-size-text-primary-desktop);
-  text-overflow: ellipsis;
   background-color: white;
   color: var(--color-secondary);
   appearance: none;
   border: 1px solid black;
+
+  /* Propriétés nécessaires pour l'ellipsis */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .font_awesome {
   color: var(--color-icons);
